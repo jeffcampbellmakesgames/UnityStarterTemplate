@@ -1,0 +1,1 @@
+This set of modal windows originated from https://github.com/siberder/UnityModalWindows repository. I've done some light code and art style modifications.
