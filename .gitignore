@@ -1,0 +1,76 @@
+# =============== #
+# Unity generated #
+# =============== #
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ibrary/
+[Bb]in/
+Unity/[Rr]ecordings/
+Unity/[Mm]emoryCaptures/
+Unity/BuildReports/
+Unity/UserSettings/
+Unity/Logs/
+sysinfo.txt
+*.stackdump
+
+# In case a plugin comes with .pdb files
+*.pdb.meta
+*.pidb.meta
+
+# Don't include any contents of StreamingAssets folder where Addressables are placed during build
+Unity/Assets/StreamingAssets/aa/
+Unity/Assets/StreamingAssets/aa.meta
+
+# Packed Addressables
+Unity/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+
+# Builds
+*.apk
+*.unitypackage
+*.unitypackage.meta
+UnityPackageManager
+
+# ====================================================== #
+# Visual Studio / MonoDevelop / Rider / VSCode generated #
+# ====================================================== #
+Unity/**/[Ee]xported[Oo]bj/
+Unity/**/.consulo/
+Unity/**/Unity/**/*.booproj
+Unity/**/*.csproj
+Unity/**/*.idea*/
+Unity/**/*.pdb
+Unity/**/*.pidb
+Unity/**/*.suo
+Unity/**/*.sln
+Unity/**/*.svd
+Unity/**/*.tmp
+Unity/**/*.user
+Unity/**/*.unityproj
+Unity/**/*.user
+Unity/**/*.userprefs
+Unity/**/*.vs/
+Unity/**/*.leu
+Unity/.vscode
+*.idea*/
+
+# JetBrains / Rider
+*/.idea
+**/Editor/JetBrains*
+Unity/ProjectSettings/RiderScriptEditorPersistedState.asset
+
+# ContextKeeper
+**/.contextkeeper/*
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store*
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+[Tt]humbs.db
+[Dd]esktop.ini
+/Unity/UserSettings/EditorUserSettings.asset
