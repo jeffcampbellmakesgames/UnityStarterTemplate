@@ -1,9 +1,9 @@
-![GitHub issues](https://img.shields.io/github/issues/jeffcampbellmakesgames/TinyMassGamesUnityTemplate)
+![GitHub issues](https://img.shields.io/github/issues/jeffcampbellmakesgames/UnityStarterTemplate)
 [![Twitter Follow](https://img.shields.io/badge/twitter-%40stampyturtle-blue.svg?style=flat&label=Follow)](https://twitter.com/stampyturtle)
 
-# TinyMassGames Unity Template
+# Unity Starter Template
 ## About
-TinyMassGames Unity Template is a template project for making a game in Unity. It comes with a set of helpful packages pre-installed along with a lightweight architecture and UI configuration to allow you to immediately jump in and start on your game.
+Unity Starter Template is a template project for making a game in Unity. It comes with a set of helpful packages pre-installed along with a lightweight architecture and UI configuration to allow you to immediately jump in and start on your game.
 
 ### Minimum Requirements
 * **Unity Version:** 2021.3.14f1 or Higher
