@@ -1,0 +1,1 @@
+**Jeff:** _These scripts are intended to represent more general-purpose UI composition and support. I intend to refactor these back into JCMG Slate in the near future._

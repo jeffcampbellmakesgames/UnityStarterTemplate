@@ -12,6 +12,7 @@ TinyMassGames Unity Template is a template project for making a game in Unity. I
 ### Packages
 * [`JCMG Utility`](https://github.com/jeffcampbellmakesgames/jcmg-utility) => A general-purpose utility library for editor/runtime.
 * [`JCMG Slate`](https://github.com/jeffcampbellmakesgames/jcmg-slate) => A lightweight UI framework library for Unity
+* [`Markdown Viewer`](https://github.com/jeffcampbellmakesgames/UnityMarkdownViewer) => An editor enhancement library that adds inspector support to markdown (.md) files.
 * [`ScriptableObject-Architecture`](https://github.com/DanielEverland/ScriptableObject-Architecture) => A scriptable architecture support library.
 * [`NaughtyAttributes`](https://github.com/dbrizov/NaughtyAttributes) => An editor enhancement library aimed for inspector enhancements.
 * [`SuperUnityBuild`](https://github.com/superunitybuild/buildtool) => A powerful automation tool for quickly and easily generating builds with Unity.
