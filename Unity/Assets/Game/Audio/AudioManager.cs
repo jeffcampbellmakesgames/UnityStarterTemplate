@@ -12,7 +12,6 @@ public class AudioManager : Singleton<AudioManager>
 	[SerializeField] private AudioMixer _masterMixer;
 	[SerializeField] private AudioMixerGroup _sfxMixer, _bgmMixer;
 
-
 	private Dictionary<string, AudioSource> _audiosources;
 	private string _currentMusic = "";
 	private bool _crossfading = false;
@@ -27,6 +26,8 @@ public class AudioManager : Singleton<AudioManager>
 	{
 		SetMusic("Lodge");
 	}
+	
+	# region Testing functions	
 
 	[Button()]
 	public void SetLodge()
@@ -45,23 +46,75 @@ public class AudioManager : Singleton<AudioManager>
 	{
 		PlaySound("Pop");
 	}
-
+	
+			
+	[Button()]
+	public void PlayPop3D()
+	{
+		PlaySound("Pop", Vector3.left);
+	}
+	
+	#endregion
+	
 	#region Playing music and sound effects
 
-	public void PlaySound(string soundName)
-	{		
+	/// <summary>
+	/// 2D PlaySound. Creates an audiosource if it doesn't already exist, plays it
+	/// if the audiosource is not already playing.
+	/// </summary>
+	/// <param name="soundName">Name of the sound to play, case sensitive.</param>
+	/// <param name="stereoBlend">Optional argument, -1 is left, +1 is right. 0 by default</param>
+	public void PlaySound(string soundName, float stereoBlend = 0)
+	{
+		AudioSource sound = PlaySoundHelper(soundName);
+		sound.spatialBlend = 0; //2d
+		sound.panStereo = stereoBlend;
+	}
+
+	/// <summary>
+	/// 3D PlaySound overload. Creates an audiosource if it doesn't already exist, plays it
+	/// if the audiosource is not already playing. 
+	/// </summary>
+	/// <param name="soundName">Name of the sound to play, case sensitive.</param>
+	/// <param name="position">World position of the sound to be played.</param>
+	public void PlaySound(string soundName, Vector3 position)
+	{
+		AudioSource sound = PlaySoundHelper(soundName);
+		sound.spatialBlend = 1; //3d
+		sound.transform.position = position;
+	}
+
+	/// <summary>
+	/// Helper function for the play sound functions. Creates an audiosource if it doesn't already exist, plays it
+	/// if the audiosource is not already playing. This function adds the audiosource to the list, but returns a reference
+	/// as, well for convenience.
+	/// </summary>
+	/// <param name="soundName">Name of the sound to play, case sensitive.</param>
+	/// <returns>reference to the audiosource created (or reused)</returns>
+	private AudioSource PlaySoundHelper(string soundName)
+	{
 		if (!_audiosources.ContainsKey(soundName))
 		{
-			_audiosources.Add(soundName, gameObject.AddComponent<AudioSource>());
+			GameObject newGO = new GameObject();
+			newGO.transform.parent = transform;
+			newGO.name = soundName;
+			_audiosources.Add(soundName, newGO.AddComponent<AudioSource>());
 			_audiosources[soundName].clip = _audioSettings.sfxDictionary[soundName];
 		}
 
 		AudioSource sound = _audiosources[soundName];
 		sound.outputAudioMixerGroup = _sfxMixer;
-		
 		if (!sound.isPlaying) sound.Play();
+		return sound;
 	}
 	
+	/// <summary>
+	/// Plays the music specified on loop. Crossfades between last played music and the new one.
+	/// Creates an audiosource if it doesn't already exist.
+	/// </summary>
+	/// <param name="musicName">Name of the music to be played, case sensitive.</param>
+	/// <param name="crossfadeTime">Time for crossfade to occur. Negative value denotes that it will use the
+	/// default crossfade time specified in the audiosettings SO.</param>
 	public void SetMusic(string musicName, float crossfadeTime = -1)
 	{
 		if (musicName == _currentMusic || _crossfading) return;
@@ -95,8 +148,7 @@ public class AudioManager : Singleton<AudioManager>
 	}
 
 	#endregion
-	
-	
+
 	#region Set Volume Functions
 
 	/// <summary>
