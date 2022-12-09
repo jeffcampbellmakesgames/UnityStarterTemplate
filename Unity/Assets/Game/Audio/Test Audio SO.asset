@@ -37,10 +37,13 @@ MonoBehaviour:
     isExpanded: 1
     _keyValues:
     - Winter
+    - Lodge
     _keys:
     - Winter
+    - Lodge
     _values:
     - {fileID: 8300000, guid: e19b3853d7d781f42a5531838350743b, type: 3}
+    - {fileID: 8300000, guid: 262aebf7b63f844409efb699316959ee, type: 3}
   sfxDictionary:
     reorderableList:
       canAdd: 1
@@ -48,7 +51,7 @@ MonoBehaviour:
       draggable: 1
       expandable: 1
       multipleSelection: 1
-      isExpanded: 0
+      isExpanded: 1
       label:
         m_Text: Keys
         m_Image: {fileID: 0}
@@ -63,7 +66,11 @@ MonoBehaviour:
       elementNameOverride: 
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
-    isExpanded: 0
-    _keyValues: []
-    _keys: []
-    _values: []
+    isExpanded: 1
+    _keyValues:
+    - Pop
+    _keys:
+    - Pop
+    _values:
+    - {fileID: 8300000, guid: 304359cf740c2fa42824081e5ae53949, type: 3}
+  crossfadeTime: 0.5

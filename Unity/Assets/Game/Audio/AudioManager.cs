@@ -25,7 +25,7 @@ public class AudioManager : Singleton<AudioManager>
 
 	public void Start()
 	{
-		SetMusic("Winter");
+		SetMusic("Lodge");
 	}
 
 	[Button()]
@@ -39,7 +39,29 @@ public class AudioManager : Singleton<AudioManager>
 	{
 		SetMusic("Winter");
 	}
+		
+	[Button()]
+	public void PlayPop()
+	{
+		PlaySound("Pop");
+	}
 
+	#region Playing music and sound effects
+
+	public void PlaySound(string soundName)
+	{		
+		if (!_audiosources.ContainsKey(soundName))
+		{
+			_audiosources.Add(soundName, gameObject.AddComponent<AudioSource>());
+			_audiosources[soundName].clip = _audioSettings.sfxDictionary[soundName];
+		}
+
+		AudioSource sound = _audiosources[soundName];
+		sound.outputAudioMixerGroup = _sfxMixer;
+		
+		if (!sound.isPlaying) sound.Play();
+	}
+	
 	public void SetMusic(string musicName, float crossfadeTime = -1)
 	{
 		if (musicName == _currentMusic || _crossfading) return;
@@ -70,8 +92,9 @@ public class AudioManager : Singleton<AudioManager>
 				_currentMusic = musicName;
 				_crossfading = false;
 			});
-
 	}
+
+	#endregion
 	
 	
 	#region Set Volume Functions
