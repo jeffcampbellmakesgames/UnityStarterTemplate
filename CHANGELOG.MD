@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Releases]
+### [0.2.1] - 2022-12-09
+#### Fixed
+* Fixed a bug where the commands for `game-exit` and `game-enter` were not available in the console.
+
 ### [0.2.0] - 2022-12-09
 #### Added
 * Added scriptable variables and game events for game state.
