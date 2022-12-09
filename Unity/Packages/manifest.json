@@ -48,7 +48,8 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0"
+    "com.unity.modules.xr": "1.0.0",
+    "com.yasirkula.ingamedebugconsole": "1.5.8"
   },
   "scopedRegistries": [
     {
@@ -60,7 +61,8 @@
         "com.github.superunitybuild.buildtool",
         "com.jeffcampbellmakesgames.slate",
         "com.jeffcampbellmakesgames.utility",
-        "com.openupm"
+        "com.openupm",
+        "com.yasirkula.ingamedebugconsole"
       ]
     }
   ]
