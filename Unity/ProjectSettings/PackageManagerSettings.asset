@@ -36,6 +36,7 @@ MonoBehaviour:
     - com.jeffcampbellmakesgames.slate
     - com.jeffcampbellmakesgames.utility
     - com.openupm
+    - com.yasirkula.ingamedebugconsole
     m_IsDefault: 0
     m_Capabilities: 0
     m_ConfigSource: 4

@@ -6,11 +6,12 @@ using NaughtyAttributes;
 using ScriptableObjectArchitecture;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
     /// <summary>
-    /// The entry-point and app-wide control singleton for the game.
+    /// The entry-point and app-wide control singleton managing <see cref="IAppSystem"/> instances.
     /// </summary>
     public sealed class AppControl : Singleton<AppControl>
     {
@@ -78,6 +79,10 @@ namespace Game
         [SerializeField, Required]
         private GameEvent _setupCompletedEvent;
 
+        [BoxGroup(RuntimeConstants.SETTINGS)]
+        [SerializeField, Scene]
+        private string _lobbySceneName;
+
         private List<IAppSystem> _appSystems;
 
         protected override void Awake()
@@ -127,8 +132,14 @@ namespace Game
         /// </summary>
         private IEnumerator CheckSetupProgressOverTime()
         {
+            // Wait for all app systems to be setup
             yield return new WaitWhile(() => !AreAllAppSystemsSetup());
 
+            // Load the lobby scene
+            var asyncOp = SceneManager.LoadSceneAsync(_lobbySceneName);
+            yield return new WaitUntil(() => asyncOp.isDone);
+
+            // Signal that the app setup has completed.
             SetupCompleted?.Invoke();
             _setupCompletedEvent.Raise();
         }

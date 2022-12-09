@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9144934020259606234}
   - component: {fileID: 9144934020259606237}
   - component: {fileID: 561452925}
+  - component: {fileID: 2112516719}
   m_Layer: 0
   m_Name: AppControl
   m_TagString: Untagged
@@ -55,6 +56,7 @@ MonoBehaviour:
       type: 2}
   _setupCompletedEvent: {fileID: 11400000, guid: 1c70bf000d57c4131a1672c7ef864912,
     type: 2}
+  _lobbySceneName: Lobby
 --- !u!114 &561452925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,3 +71,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneNames:
   - PreloadUI
+--- !u!114 &2112516719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9144934020259606236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8be440fb6c140469b8a0cb390da3c7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

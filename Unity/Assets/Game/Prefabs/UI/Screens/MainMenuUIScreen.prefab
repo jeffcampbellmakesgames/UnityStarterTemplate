@@ -1115,6 +1115,7 @@ MonoBehaviour:
   _creditsGameButton: {fileID: 920054465}
   _setupCompletedEvent: {fileID: 11400000, guid: 1c70bf000d57c4131a1672c7ef864912,
     type: 2}
+  _gameExitedEvent: {fileID: 11400000, guid: 8b2d1995c37bf4fb8a65434d38956cb5, type: 2}
 --- !u!114 &7573690388357190576
 MonoBehaviour:
   m_ObjectHideFlags: 0

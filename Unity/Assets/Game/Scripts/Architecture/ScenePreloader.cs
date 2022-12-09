@@ -14,7 +14,7 @@ namespace Game
     public sealed class ScenePreloader : MonoBehaviour, IAppSystem
     {
         [Label("Scenes")]
-        [SerializeField, Required, Scene]
+        [SerializeField, Scene]
         private List<string> _sceneNames;
 
         private bool _areScenesLoaded;

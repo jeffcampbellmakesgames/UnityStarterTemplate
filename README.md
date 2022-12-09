@@ -16,6 +16,7 @@ Unity Starter Template is a template project for making a game in Unity. It come
 * [`ScriptableObject-Architecture`](https://github.com/DanielEverland/ScriptableObject-Architecture) => A scriptable architecture support library.
 * [`NaughtyAttributes`](https://github.com/dbrizov/NaughtyAttributes) => An editor enhancement library aimed for inspector enhancements.
 * [`SuperUnityBuild`](https://github.com/superunitybuild/buildtool) => A powerful automation tool for quickly and easily generating builds with Unity.
+* [`Yasirkula DebugConsole`](https://github.com/yasirkula/UnityIngameDebugConsole) => An in-game debug console for viewing console logs and executing commands at runtime.
 
 ## How to Use
 On the top right of this github page, select the *Use this template* button. This will enable you to create your own version of this repository (can be made private or public).
