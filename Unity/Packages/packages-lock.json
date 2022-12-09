@@ -45,6 +45,13 @@
       "dependencies": {},
       "url": "https://package.openupm.com"
     },
+    "com.rotaryheart.serializabledictionarylite": {
+      "version": "https://github.com/RotaryHeart/SerializableDictionaryLite.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "db6d9f0fb695e5ccb0994cfc43ab21d75e8a56a6"
+    },
     "com.unity.2d.animation": {
       "version": "7.0.8",
       "depth": 1,
