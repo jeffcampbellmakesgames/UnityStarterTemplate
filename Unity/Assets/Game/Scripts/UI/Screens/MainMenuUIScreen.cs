@@ -28,6 +28,10 @@ namespace Game
         [SerializeField, Required]
         private GameEvent _setupCompletedEvent;
 
+        [BoxGroup(RuntimeConstants.EVENTS)]
+        [SerializeField, Required]
+        private GameEvent _gameExitedEvent;
+
         protected override void Awake()
         {
             base.Awake();
@@ -38,9 +42,10 @@ namespace Game
             _creditsGameButton.onClick.AddListener(OnCreditsButtonClicked);
 
             _setupCompletedEvent.AddListener(OnAppSetupComplete);
+            _gameExitedEvent.AddListener(OnGameExited);
         }
 
-        protected override void OnDestroy()
+       protected override void OnDestroy()
         {
             base.OnDestroy();
 
@@ -50,6 +55,7 @@ namespace Game
             _creditsGameButton.onClick.RemoveListener(OnCreditsButtonClicked);
 
             _setupCompletedEvent.RemoveListener(OnAppSetupComplete);
+            _gameExitedEvent.RemoveListener(OnGameExited);
         }
 
         /// <summary>
@@ -65,8 +71,9 @@ namespace Game
         /// </summary>
         private void OnPlayGameButtonClicked()
         {
-            // TODO
-            throw new System.NotImplementedException();
+            GameControl.Instance.EnterGame();
+
+            Hide();
         }
 
         /// <summary>
@@ -84,6 +91,14 @@ namespace Game
         private void OnCreditsButtonClicked()
         {
             // TODO
+        }
+
+        /// <summary>
+        /// Invoked when the game is exited from back to the main menu.
+        /// </summary>
+        private void OnGameExited()
+        {
+            Show();
         }
     }
 }
