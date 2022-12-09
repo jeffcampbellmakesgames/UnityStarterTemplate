@@ -27,7 +27,7 @@ public class AudioManager : Singleton<AudioManager>
 		SetMusic("Lodge");
 	}
 	
-	# region Testing functions	
+	/*# region Testing functions	
 
 	[Button()]
 	public void SetLodge()
@@ -54,7 +54,7 @@ public class AudioManager : Singleton<AudioManager>
 		PlaySound("Pop", Vector3.left);
 	}
 	
-	#endregion
+	#endregion*/
 	
 	#region Playing music and sound effects
 
