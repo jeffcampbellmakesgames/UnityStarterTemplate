@@ -8,9 +8,14 @@ using UnityEngine.Audio;
 
 public class AudioManager : Singleton<AudioManager>
 {
-	[SerializeField] private AudioSO _audioSettings;	//TODO add [SerializeField] private float _crossfadeTime;
-	[SerializeField] private AudioMixer _masterMixer;
-	[SerializeField] private AudioMixerGroup _sfxMixer, _bgmMixer;
+	[SerializeField, Required] 
+	private AudioSO _audioSettings;
+	
+	[SerializeField, Required] 
+	private AudioMixer _masterMixer;
+	
+	[SerializeField, Required] 
+	private AudioMixerGroup _sfxMixer, _bgmMixer;
 
 	private Dictionary<string, AudioSource> _audiosources;
 	private string _currentMusic = "";
@@ -132,7 +137,7 @@ public class AudioManager : Singleton<AudioManager>
 		newMusic.outputAudioMixerGroup = _bgmMixer;
 
 		_crossfading = true;
-		LeanTween.value(0.0f, 1.0f, crossfadeTime)
+		/*LeanTween.value(0.0f, 1.0f, crossfadeTime) TODO add back with DOTween
 			.setOnUpdate((value) =>
 			{		
 				if (_currentMusic != "")
@@ -144,7 +149,7 @@ public class AudioManager : Singleton<AudioManager>
 			{
 				_currentMusic = musicName;
 				_crossfading = false;
-			});
+			});*/
 	}
 
 	#endregion
@@ -187,7 +192,6 @@ public class AudioManager : Singleton<AudioManager>
 	{
 		volume = Mathf.Clamp(volume, 0.0001f, 1.0f);
 		volume =  Mathf.Log10(volume) * 20; //-80db is muted, 0 is regular "full" volume
-		//TODO set to logarithmic scaling
 		_masterMixer.SetFloat(parameterName, volume); 
 	}
 	#endregion
