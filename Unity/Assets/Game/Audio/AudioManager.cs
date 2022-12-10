@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using JCMG.Utility;
 using NaughtyAttributes;
 using UnityEngine;
@@ -27,12 +28,12 @@ public class AudioManager : Singleton<AudioManager>
 		_audiosources = new();
 	}
 
-	public void Start()
+	/*public void Start()
 	{
 		SetMusic("Lodge");
 	}
 	
-	/*# region Testing functions	
+	# region Testing functions	
 
 	[Button()]
 	public void SetLodge()
@@ -137,19 +138,17 @@ public class AudioManager : Singleton<AudioManager>
 		newMusic.outputAudioMixerGroup = _bgmMixer;
 
 		_crossfading = true;
-		/*LeanTween.value(0.0f, 1.0f, crossfadeTime) TODO add back with DOTween
-			.setOnUpdate((value) =>
-			{		
-				if (_currentMusic != "")
-					_audiosources[_currentMusic].volume = 1 - value;
-				
-				_audiosources[musicName].volume = 1;
-			})
-			.setOnComplete(() =>
+		if (_currentMusic != "")
+		{
+			_audiosources[_currentMusic].DOFade(0, crossfadeTime);
+		}
+		_audiosources[musicName].volume = 0;
+		_audiosources[musicName].DOFade(1, crossfadeTime)
+			.OnComplete(() =>
 			{
 				_currentMusic = musicName;
 				_crossfading = false;
-			});*/
+			});
 	}
 
 	#endregion
