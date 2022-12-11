@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using DG.Tweening;
 using JCMG.Utility;
 using NaughtyAttributes;
+using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine;
 using UnityEngine.Audio;
 
 public class AudioManager : Singleton<AudioManager>
 {
 	[SerializeField, Required] 
-	private AudioSO _audioSettings;
+	private AudioSettings _audioSettings;
 	
 	[SerializeField, Required] 
 	private AudioMixer _masterMixer;
@@ -19,51 +20,61 @@ public class AudioManager : Singleton<AudioManager>
 	private AudioMixerGroup _sfxMixer, _bgmMixer;
 
 	private Dictionary<string, AudioSource> _audiosources;
+	private SerializableDictionaryBase<string, AudioClip> _sfxDictionary;
+	private SerializableDictionaryBase<string, AudioClip> _bgmDictionary;
 	private string _currentMusic = "";
 	private bool _crossfading = false;
+	private static string NAME_CONSTRUCTION_PREFIX = "AUTOADDED_";
 
 	protected override void Awake()
 	{
 		base.Awake();
 		_audiosources = new();
+		_sfxDictionary = _audioSettings.sfxDictionary;
+		_bgmDictionary = _audioSettings.bgmDictionary;
 	}
-
-	/*public void Start()
-	{
-		SetMusic("Lodge");
-	}
-	
-	# region Testing functions	
-
-	[Button()]
-	public void SetLodge()
-	{
-		SetMusic("Lodge");
-	}
-	
-	[Button()]
-	public void SetWinter()
-	{
-		SetMusic("Winter");
-	}
-		
-	[Button()]
-	public void PlayPop()
-	{
-		PlaySound("Pop");
-	}
-	
-			
-	[Button()]
-	public void PlayPop3D()
-	{
-		PlaySound("Pop", Vector3.left);
-	}
-	
-	#endregion*/
 	
 	#region Playing music and sound effects
 
+	//I know these overloaded PlaySound functions are a little gross,
+	// I figure we can think of a better way when we refactor from strings to enums (or something else)
+	/// <summary>
+	/// 2D PlaySound. Creates an audiosource if it doesn't already exist, plays it. Adds the clip to your audiosettings
+	/// if it's not already there.
+	/// if the audiosource is not already playing.
+	/// </summary>
+	/// <param name="clip">AudioClip of the sound to play</param>
+	/// <param name="stereoBlend">Optional argument, -1 is left, +1 is right. 0 by default</param>
+	public void PlaySound(AudioClip clip, float stereoBlend = 0)
+	{
+		string constructedName = NAME_CONSTRUCTION_PREFIX + clip.name;
+		if (!_sfxDictionary.ContainsKey(constructedName))
+		{
+			_sfxDictionary.Add(constructedName, clip);
+		}
+		PlaySound(constructedName, stereoBlend);
+	}
+	
+	//I know these overloaded PlaySound functions are a little gross,
+	// I figure we can think of a better way when we refactor from strings to enums (or something else)
+	/// <summary>
+	/// 2D PlaySound. Creates an audiosource if it doesn't already exist, plays it. Adds the clip to your audiosettings
+	/// if it's not already there.
+	/// if the audiosource is not already playing.
+	/// </summary>
+	/// <param name="clip">AudioClip of the sound to play</param>
+	/// <param name="position">World position of the sound to be played.</param>
+	public void PlaySound(AudioClip clip, Vector3 position)
+	{
+		string constructedName = NAME_CONSTRUCTION_PREFIX + clip.name;
+		if (!_sfxDictionary.ContainsKey(constructedName))
+		{
+			_sfxDictionary.Add(constructedName, clip);
+		}
+		PlaySound(constructedName, position);
+	}
+	
+	
 	/// <summary>
 	/// 2D PlaySound. Creates an audiosource if it doesn't already exist, plays it
 	/// if the audiosource is not already playing.
@@ -89,29 +100,23 @@ public class AudioManager : Singleton<AudioManager>
 		sound.spatialBlend = 1; //3d
 		sound.transform.position = position;
 	}
-
+	
 	/// <summary>
-	/// Helper function for the play sound functions. Creates an audiosource if it doesn't already exist, plays it
-	/// if the audiosource is not already playing. This function adds the audiosource to the list, but returns a reference
-	/// as, well for convenience.
+	/// Plays the music specified on loop. Crossfades between last played music and the new one.
+	/// Creates an audiosource if it doesn't already exist. Adds the clip to your audioSettings as a side effect,
+	/// if it's not already there.
 	/// </summary>
-	/// <param name="soundName">Name of the sound to play, case sensitive.</param>
-	/// <returns>reference to the audiosource created (or reused)</returns>
-	private AudioSource PlaySoundHelper(string soundName)
+	/// <param name="clip">Audioclip of the music to be played</param>
+	/// <param name="crossfadeTime">Time for crossfade to occur. Negative value denotes that it will use the
+	/// default crossfade time specified in the audiosettings SO.</param>
+	public void SetMusic(AudioClip clip, float crossfadeTime = -1)
 	{
-		if (!_audiosources.ContainsKey(soundName))
+		string constructedName = NAME_CONSTRUCTION_PREFIX + clip.name;
+		if (!_bgmDictionary.ContainsKey(constructedName))
 		{
-			GameObject newGO = new GameObject();
-			newGO.transform.parent = transform;
-			newGO.name = soundName;
-			_audiosources.Add(soundName, newGO.AddComponent<AudioSource>());
-			_audiosources[soundName].clip = _audioSettings.sfxDictionary[soundName];
+			_bgmDictionary.Add(constructedName, clip);
 		}
-
-		AudioSource sound = _audiosources[soundName];
-		sound.outputAudioMixerGroup = _sfxMixer;
-		if (!sound.isPlaying) sound.Play();
-		return sound;
+		SetMusic(constructedName, crossfadeTime);
 	}
 	
 	/// <summary>
@@ -129,7 +134,7 @@ public class AudioManager : Singleton<AudioManager>
 		if (!_audiosources.ContainsKey(musicName))
 		{
 			_audiosources.Add(musicName, gameObject.AddComponent<AudioSource>());
-			_audiosources[musicName].clip = _audioSettings.bgmDictionary[musicName];
+			_audiosources[musicName].clip = _bgmDictionary[musicName];
 		}
 
 		AudioSource newMusic = _audiosources[musicName];
@@ -182,6 +187,34 @@ public class AudioManager : Singleton<AudioManager>
 		SetVolume(volume, "VolumeBGM");
 	}
 
+	#endregion
+	
+	
+
+	/// <summary>
+	/// Helper function for the play sound functions. Creates an audiosource if it doesn't already exist, plays it
+	/// if the audiosource is not already playing. This function adds the audiosource to the list, but returns a reference
+	/// as, well for convenience.
+	/// </summary>
+	/// <param name="soundName">Name of the sound to play, case sensitive.</param>
+	/// <returns>reference to the audiosource created (or reused)</returns>
+	private AudioSource PlaySoundHelper(string soundName)
+	{
+		if (!_audiosources.ContainsKey(soundName))
+		{
+			GameObject newGO = new GameObject();
+			newGO.transform.parent = transform;
+			newGO.name = soundName;
+			_audiosources.Add(soundName, newGO.AddComponent<AudioSource>());
+			_audiosources[soundName].clip = _sfxDictionary[soundName];
+		}
+
+		AudioSource sound = _audiosources[soundName];
+		sound.outputAudioMixerGroup = _sfxMixer;
+		if (!sound.isPlaying) sound.Play();
+		return sound;
+	}
+	
 	/// <summary>
 	/// Helper function for setting exposed volume parameters of _masterMixer
 	/// </summary>
@@ -193,6 +226,5 @@ public class AudioManager : Singleton<AudioManager>
 		volume =  Mathf.Log10(volume) * 20; //-80db is muted, 0 is regular "full" volume
 		_masterMixer.SetFloat(parameterName, volume); 
 	}
-	#endregion
 	
 }

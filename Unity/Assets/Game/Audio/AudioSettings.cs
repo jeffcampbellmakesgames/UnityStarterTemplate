@@ -5,7 +5,7 @@ using SuperUnityBuild.BuildTool;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Audio/Track List")]
-public class AudioSO : ScriptableObject
+public class AudioSettings : ScriptableObject
 {
 	
 	public SerializableDictionaryBase<string, AudioClip> bgmDictionary;
