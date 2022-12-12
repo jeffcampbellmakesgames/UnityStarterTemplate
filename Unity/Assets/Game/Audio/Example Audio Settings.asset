@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 552881e705993f2498ee6b398ab62302, type: 3}
-  m_Name: Test Audio SO
+  m_Name: Example Audio Settings
   m_EditorClassIdentifier: 
   bgmDictionary:
     reorderableList:
@@ -35,18 +35,9 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues:
-    - Dodge
-    - Machine
-    - Weird Feeling
-    _keys:
-    - Dodge
-    - Machine
-    - Weird Feeling
-    _values:
-    - {fileID: 8300000, guid: 4c6e2b95ad9209642a013737eb9bd76e, type: 3}
-    - {fileID: 8300000, guid: 8f405eae79304504981659189599b733, type: 3}
-    - {fileID: 8300000, guid: e8cc7eda20d0cb842b0626cd510ec116, type: 3}
+    _keyValues: []
+    _keys: []
+    _values: []
   sfxDictionary:
     reorderableList:
       canAdd: 1
@@ -70,10 +61,7 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues:
-    - Pop
-    _keys:
-    - Pop
-    _values:
-    - {fileID: 8300000, guid: 304359cf740c2fa42824081e5ae53949, type: 3}
+    _keyValues: []
+    _keys: []
+    _values: []
   crossfadeTime: 0.5
