@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f351fc1a6cf09e6429d7fcee563de780, type: 3}
   m_Name: SOArchitecture_Settings
   m_EditorClassIdentifier: 
-  _codeGenerationTargetDirectory: CODE_GENERATION
-  _codeGenerationAllowOverwrite: 0
+  _codeGenerationTargetDirectory: Game/Scripts/Generated
+  _codeGenerationAllowOverwrite: 1
   _defualtCreateAssetMenuOrder: 120

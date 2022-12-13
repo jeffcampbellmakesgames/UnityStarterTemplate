@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -13,6 +14,11 @@ namespace Game
 		menuName = "Game/Systems/SettingsAppSystem")]
 	public sealed class SettingsAppSystem : ScriptableAppSystem
 	{
+		/// <summary>
+		/// Invoked when the player has updated their settings.
+		/// </summary>
+		public event Action Updated;
+
 		/// <summary>
 		/// The player's settings data.
 		/// </summary>
@@ -39,6 +45,8 @@ namespace Game
 			{
 				_settings = new UserSettings();
 			}
+
+			_settings.SetUpdatedCallback(Updated);
 		}
 
 		/// <inheritdoc />
