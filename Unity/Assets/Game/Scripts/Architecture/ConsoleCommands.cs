@@ -1,4 +1,5 @@
 using IngameDebugConsole;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Game
@@ -8,6 +9,29 @@ namespace Game
 	/// </summary>
 	public class ConsoleCommands : MonoBehaviour
 	{
+		[BoxGroup(RuntimeConstants.SYSTEMS)]
+		[SerializeField, Required]
+		private PauseAppSystem _pauseAppSystem;
+
+		private void Awake()
+		{
+			// Add all console commands that make use of local fields on this class as they cannot be made static.
+			DebugLogConsole.AddCommand(
+				"pause-toggle",
+				"Toggles the pause state of the game on or off. Only works while the game is loaded.",
+				TogglePauseCommand);
+		}
+
+		/// <summary>
+		/// A console command for toggling the pause state of the game.
+		/// </summary>
+		public void TogglePauseCommand()
+		{
+			_pauseAppSystem.TogglePause();
+
+			Debug.Log($"The game is now paused: {_pauseAppSystem.IsGamePaused}.");
+		}
+
 		/// <summary>
 		/// Hides the main menu and loads the game scene.
 		/// </summary>
