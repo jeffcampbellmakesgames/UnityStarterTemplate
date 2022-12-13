@@ -2003,7 +2003,7 @@ PrefabInstance:
     - target: {fileID: 8736039589188509251, guid: b3c6dcf5a4e3641edaa407ebd2ed7933,
         type: 3}
       propertyPath: m_text
-      value: Musix Volume
+      value: Music Volume
       objectReference: {fileID: 0}
     - target: {fileID: 8736039589188509251, guid: b3c6dcf5a4e3641edaa407ebd2ed7933,
         type: 3}

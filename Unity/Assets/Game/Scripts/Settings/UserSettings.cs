@@ -1,9 +1,13 @@
+using System;
 using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Game
 {
-	public class UserSettings
+	/// <summary>
+	/// Represents the player's local settings.
+	/// </summary>
+	public sealed class UserSettings
 	{
 		/// <summary>
 		/// The normalized master volume level for the game (0-1).
@@ -12,7 +16,12 @@ namespace Game
 		public float MasterVolume
 		{
 			get => _masterVolume;
-			set => _masterVolume = Mathf.Clamp01(value);
+			set
+			{
+				_masterVolume = Mathf.Clamp01(value);
+
+				_onUpdated?.Invoke();
+			}
 		}
 
 		/// <summary>
@@ -22,7 +31,12 @@ namespace Game
 		public float SFXVolume
 		{
 			get => _sfxVolume;
-			set => _sfxVolume = Mathf.Clamp01(value);
+			set
+			{
+				_sfxVolume = Mathf.Clamp01(value);
+
+				_onUpdated?.Invoke();
+			}
 		}
 
 		/// <summary>
@@ -32,7 +46,12 @@ namespace Game
 		public float MusicVolume
 		{
 			get => _musicVolume;
-			set => _musicVolume = Mathf.Clamp01(value);
+			set
+			{
+				_musicVolume = Mathf.Clamp01(value);
+
+				_onUpdated?.Invoke();
+			}
 		}
 
 		[JsonProperty("MasterVolume")]
@@ -44,12 +63,22 @@ namespace Game
 		[JsonProperty("MusicVolume")]
 		private float _musicVolume;
 
+		private Action _onUpdated;
+
 		public UserSettings()
 		{
 			// Set all the default values for these settings.
 			_masterVolume = 1;
 			_sfxVolume = 1;
 			_musicVolume = 1;
+		}
+
+		/// <summary>
+		/// Sets the callback to be invoked when this data is updated.
+		/// </summary>
+		public void SetUpdatedCallback(Action onUpdated)
+		{
+			_onUpdated = onUpdated;
 		}
 	}
 }
