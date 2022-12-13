@@ -9,7 +9,7 @@ Unity Starter Template is a template project for making a game in Unity. It come
 * **Unity Version:** 2021.3.14f1 or Higher
 * **Scripting Runtime**: .Net 4.X
 
-### Packages
+### Third-party packages and plugins
 * [`JCMG Utility`](https://github.com/jeffcampbellmakesgames/jcmg-utility) => A general-purpose utility library for editor/runtime.
 * [`JCMG Slate`](https://github.com/jeffcampbellmakesgames/jcmg-slate) => A lightweight UI framework library for Unity
 * [`Markdown Viewer`](https://github.com/jeffcampbellmakesgames/UnityMarkdownViewer) => An editor enhancement library that adds inspector support to markdown (.md) files.
@@ -17,6 +17,7 @@ Unity Starter Template is a template project for making a game in Unity. It come
 * [`NaughtyAttributes`](https://github.com/dbrizov/NaughtyAttributes) => An editor enhancement library aimed for inspector enhancements.
 * [`SuperUnityBuild`](https://github.com/superunitybuild/buildtool) => A powerful automation tool for quickly and easily generating builds with Unity.
 * [`Yasirkula DebugConsole`](https://github.com/yasirkula/UnityIngameDebugConsole) => An in-game debug console for viewing console logs and executing commands at runtime.
+* [`DOTween`](http://dotween.demigiant.com/) => DOTween is a fast, efficient, fully type-safe object-oriented animation engine for Unity, optimized for C# users, free and open-source, with tons of advanced features
 
 ## How to Use
 On the top right of this github page, select the *Use this template* button. This will enable you to create your own version of this repository (can be made private or public).
