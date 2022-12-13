@@ -54,6 +54,10 @@ MonoBehaviour:
     _appSystemBehavior: {fileID: 0}
     _appSystemScriptableObject: {fileID: 11400000, guid: 14109dcff536646d3adf465a6662d25f,
       type: 2}
+  - _sourceType: 1
+    _appSystemBehavior: {fileID: 0}
+    _appSystemScriptableObject: {fileID: 11400000, guid: cc494e12eca85469a9206da8f8634a18,
+      type: 2}
   _setupCompletedEvent: {fileID: 11400000, guid: 1c70bf000d57c4131a1672c7ef864912,
     type: 2}
   _lobbySceneName: Lobby
@@ -83,3 +87,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8be440fb6c140469b8a0cb390da3c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pauseAppSystem: {fileID: 11400000, guid: cc494e12eca85469a9206da8f8634a18, type: 2}
