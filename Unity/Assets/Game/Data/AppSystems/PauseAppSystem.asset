@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9b59f38d514805a82dd689be8d7ca5, type: 3}
   m_Name: PauseAppSystem
   m_EditorClassIdentifier: 
-  _isGamePausedBoolVariable: {fileID: 0}
+  _isGamePausedBoolVariable: {fileID: 11400000, guid: af972e9e5d4f741a797ee88e49fd5ff9,
+    type: 2}
+  _isGameLoadedBoolVariable: {fileID: 11400000, guid: ce95624f0bf1a40148c748573407279a,
+    type: 2}
   _doPauseTimescale: 0
