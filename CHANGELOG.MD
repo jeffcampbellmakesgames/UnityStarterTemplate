@@ -5,6 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Releases]
+### [0.5.0] - 2022-12-14
+#### Added
+* Added Graphy UI package for showing performance metrics at runtime.
+* Created several console commands for showing, hiding, and configuring the Graphy UI.
+	* `perf-ui-toggle` => Toggles the performance metrics UI on or off.
+	* `perf-ui-fps` => Configures the performance metrics UI for FPS on or off. This does not hide or show the overlay.
+	* `perf-ui-audio` => Configures the performance metrics UI for Audio on or off. This does not hide or show the overlay.
+	* `perf-ui-ram` => Configures the performance metrics UI for RAM on or off. This does not hide or show the overlay.
+	* `perf-ui-advanced` => Configures the performance metrics UI for Advanced on or off. This does not hide or show the overlay.
+
 ### [0.4.1] - 2022-12-14
 #### Fixed
 * Assigned missing references for PauseAppSystem

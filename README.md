@@ -18,6 +18,7 @@ Unity Starter Template is a template project for making a game in Unity. It come
 * [`SuperUnityBuild`](https://github.com/superunitybuild/buildtool) => A powerful automation tool for quickly and easily generating builds with Unity.
 * [`Yasirkula DebugConsole`](https://github.com/yasirkula/UnityIngameDebugConsole) => An in-game debug console for viewing console logs and executing commands at runtime.
 * [`DOTween`](http://dotween.demigiant.com/) => DOTween is a fast, efficient, fully type-safe object-oriented animation engine for Unity, optimized for C# users, free and open-source, with tons of advanced features
+* [`Graphy`](https://github.com/Tayx94/graphy) => Graphy is the ultimate, easy to use, feature packed FPS counter, stats monitor and debugger for your Unity project.
 
 ## How to Use
 On the top right of this github page, select the *Use this template* button. This will enable you to create your own version of this repository (can be made private or public).
