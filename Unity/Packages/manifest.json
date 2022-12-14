@@ -50,7 +50,8 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0",
-    "com.yasirkula.ingamedebugconsole": "1.5.8"
+    "com.yasirkula.ingamedebugconsole": "1.5.8",
+    "com.tayx.graphy": "3.0.2"
   },
   "scopedRegistries": [
     {
@@ -63,6 +64,7 @@
         "com.jeffcampbellmakesgames.slate",
         "com.jeffcampbellmakesgames.utility",
         "com.openupm",
+        "com.tayx.graphy",
         "com.yasirkula.ingamedebugconsole"
       ]
     }
