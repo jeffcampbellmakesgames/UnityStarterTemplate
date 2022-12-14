@@ -54,6 +54,46 @@ namespace Game
 			}
 		}
 
+		/// <summary>
+		/// Returns true if the FPS performance UI should be shown when active or false if should be hidden.
+		/// </summary>
+		[JsonIgnore]
+		public bool ShowFPSPerfUI
+		{
+			get => _showFPSPerfUI;
+			set => _showFPSPerfUI = value;
+		}
+
+		/// <summary>
+		/// Returns true if the Audio performance UI should be shown when active or false if should be hidden.
+		/// </summary>
+		[JsonIgnore]
+		public bool ShowAudioPerfUI
+		{
+			get => _showAudioPerfUI;
+			set => _showAudioPerfUI = value;
+		}
+
+		/// <summary>
+		/// Returns true if the RAM performance UI should be shown when active or false if should be hidden.
+		/// </summary>
+		[JsonIgnore]
+		public bool ShowRAMPerfUI
+		{
+			get => _showRAMPerfUI;
+			set => _showRAMPerfUI = value;
+		}
+
+		/// <summary>
+		/// Returns true if the Advanced performance UI should be shown when active or false if should be hidden.
+		/// </summary>
+		[JsonIgnore]
+		public bool ShowAdvancedPerfUI
+		{
+			get => _showAdvancedPerfUI;
+			set => _showAdvancedPerfUI = value;
+		}
+
 		[JsonProperty("MasterVolume")]
 		private float _masterVolume;
 
@@ -63,6 +103,18 @@ namespace Game
 		[JsonProperty("MusicVolume")]
 		private float _musicVolume;
 
+		[JsonProperty("ShowFPSPerfUI")]
+		private bool _showFPSPerfUI;
+
+		[JsonProperty("ShowAudioPerfUI")]
+		private bool _showAudioPerfUI;
+
+		[JsonProperty("ShowRAMPerfUI")]
+		private bool _showRAMPerfUI;
+
+		[JsonProperty("ShowAdvancedPerfUI")]
+		private bool _showAdvancedPerfUI;
+
 		private Action _onUpdated;
 
 		public UserSettings()
@@ -71,6 +123,11 @@ namespace Game
 			_masterVolume = 1;
 			_sfxVolume = 1;
 			_musicVolume = 1;
+
+			_showFPSPerfUI = true;
+			_showAudioPerfUI = true;
+			_showRAMPerfUI = true;
+			_showAdvancedPerfUI = true;
 		}
 
 		/// <summary>
