@@ -94,6 +94,16 @@ namespace Game
 			set => _showAdvancedPerfUI = value;
 		}
 
+		/// <summary>
+		/// Returns the targeted frame per second mode.
+		/// </summary>
+		[JsonIgnore]
+		public FramePerSecondMode FramePerSecondMode
+		{
+			get => _framePerSecondMode;
+			set => _framePerSecondMode = value;
+		}
+
 		[JsonProperty("MasterVolume")]
 		private float _masterVolume;
 
@@ -115,6 +125,9 @@ namespace Game
 		[JsonProperty("ShowAdvancedPerfUI")]
 		private bool _showAdvancedPerfUI;
 
+		[JsonProperty("FramePerSecondMode")]
+		private FramePerSecondMode _framePerSecondMode;
+
 		private Action _onUpdated;
 
 		public UserSettings()
@@ -124,6 +137,7 @@ namespace Game
 			_sfxVolume = 1;
 			_musicVolume = 1;
 
+			// Graphy Settings
 			_showFPSPerfUI = true;
 			_showAudioPerfUI = true;
 			_showRAMPerfUI = true;

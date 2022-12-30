@@ -213,11 +213,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1540371103628591467}
-  headerText: {fileID: 0}
-  bodyText: {fileID: 0}
+  headerText: {fileID: 5691840282198446257}
+  bodyText: {fileID: 5968268247397353529}
   closeButton: {fileID: 1455349719714809106}
   backgroundButton: {fileID: 9114383977448605184}
-  buttonsRoot: {fileID: 0}
+  buttonsRoot: {fileID: 3282285628836185395}
   inputField: {fileID: 2909695674915122447}
 --- !u!95 &1540371103628591467
 Animator:

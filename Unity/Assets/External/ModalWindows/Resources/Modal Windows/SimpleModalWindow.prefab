@@ -173,8 +173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3170120574637503811}
-  headerText: {fileID: 0}
-  bodyText: {fileID: 0}
+  headerText: {fileID: 5578739066171836112}
+  bodyText: {fileID: 4471418506663463154}
   closeButton: {fileID: 3074982581418275130}
   backgroundButton: {fileID: 4675355892017132072}
   buttonsRoot: {fileID: 2599654245754518971}

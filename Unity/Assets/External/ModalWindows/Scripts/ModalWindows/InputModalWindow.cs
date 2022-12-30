@@ -13,8 +13,8 @@ public class InputModalWindow : ModalWindow<InputModalWindow>
 
     public InputModalWindow SetInputField(Action<string> onDone, string initialValue = "", string placeholderValue = "Type here")
     {
-        inputField.text = initialValue;
-        ((Text)inputField.placeholder).text = placeholderValue;
+        inputField.SetTextWithoutNotify(initialValue);
+        ((TMP_Text)inputField.placeholder).SetText(initialValue);
         onInputFieldDone = onDone;
 
         return this;

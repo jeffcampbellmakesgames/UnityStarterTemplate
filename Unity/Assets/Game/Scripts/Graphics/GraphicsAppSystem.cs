@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+using JCMG.Utility;
 using NaughtyAttributes;
 using Tayx.Graphy;
 using UnityEngine;
@@ -33,6 +36,15 @@ namespace Game
 		/// Invoked when the app setup has completed.
 		/// </summary>
 		private void OnSetupCompleted()
+		{
+			ConfigureGraphy();
+			ConfigureGraphics();
+		}
+
+		/// <summary>
+		/// Configures graphy based on any user settings.
+		/// </summary>
+		private void ConfigureGraphy()
 		{
 			var userSettings = _settingsAppSystem.Settings;
 			var graphyManager = GraphyManager.Instance;
@@ -70,6 +82,41 @@ namespace Game
 
 			// Turn off the perf UI
 			graphyManager.ToggleActive();
+		}
+
+		/// <summary>
+		/// Configures graphics settings for this device based on the user settings.
+		/// </summary>
+		private void ConfigureGraphics()
+		{
+			var settings = _settingsAppSystem.Settings;
+
+			// Set target framerate
+			var currentMode = settings.FramePerSecondMode;
+
+			if (!GraphicsTools.AvailableFramePerSecondModes.Contains(currentMode))
+			{
+				currentMode = GraphicsTools.GetDefaultFramePerSecondMode();
+				settings.FramePerSecondMode = currentMode;
+			}
+
+			SetFrameMode(currentMode);
+		}
+
+		/// <summary>
+		/// Sets the appropriate graphics settings to achieve the desired <paramref name="mode"/>.
+		/// </summary>
+		public void SetFrameMode(FramePerSecondMode mode)
+		{
+			var targetFrameRate = mode switch
+			{
+				FramePerSecondMode.Thirty => 30,
+				FramePerSecondMode.Sixty => 60,
+				FramePerSecondMode.Uncapped => -1,
+				_ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
+			};
+
+			Application.targetFrameRate = targetFrameRate;
 		}
 	}
 }

@@ -44,6 +44,7 @@ namespace Game
 			else
 			{
 				_settings = new UserSettings();
+				_settings.FramePerSecondMode = GraphicsTools.GetDefaultFramePerSecondMode();
 			}
 
 			_settings.SetUpdatedCallback(Updated);
