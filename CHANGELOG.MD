@@ -5,6 +5,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Releases]
+### [0.6.0] - 2022-12-30
+#### Added
+* Implemented Graphics Settings UI to enable a player to modify their FPS target, resolution, and window style. When changed, a player can then hit a Apply Changes button to set thosen changes and either accept or reject them in a modal. If no input is provided the changes are automatically reverted after a short duration.
+* Added AssemblyDefinition for ModalWindows and added as ref to Game
+
+#### Changed
+* Modified the MainMenu to hide when the settings button is clicked and when the settings menu is closed outside of the game the MainMenu will be relaunched.
+
+#### Fixed
+* Modified the scaling of the DebugUIConsole to work better in builds.
+* Fixed missing references for ModalWindow prefabs.
+* Fixed NRE occuring due to an invalid cast for Text in ModalWindows.
+
 ### [0.5.0] - 2022-12-14
 #### Added
 * Added Graphy UI package for showing performance metrics at runtime.
