@@ -1,5 +1,6 @@
 using JCMG.Slate;
 using NaughtyAttributes;
+using ScriptableObjectArchitecture;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +34,10 @@ namespace Game
 		[BoxGroup(RuntimeConstants.SYSTEMS)]
 		[SerializeField, Required]
 		private SettingsAppSystem _settingsAppSystem;
+
+		[BoxGroup(RuntimeConstants.DATA)]
+		[SerializeField, Required]
+		private BoolVariable _isInGameBoolVariable;
 
 		protected override void Awake()
 		{
@@ -74,6 +79,12 @@ namespace Game
 		/// </summary>
 		private void OnExitButtonClicked()
 		{
+			if (!_isInGameBoolVariable)
+			{
+				var mainMenuUIScreen = UIScreenControl.GetPanel<MainMenuUIScreen>();
+				mainMenuUIScreen.Show(immediate:true);
+			}
+
 			Hide();
 		}
 

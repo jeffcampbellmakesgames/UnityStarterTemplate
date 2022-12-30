@@ -83,6 +83,8 @@ namespace Game
         {
             var settingsUIScreen = UIScreenControl.GetPanel<SettingsUIScreen>();
             settingsUIScreen.Show();
+
+            Hide();
         }
 
         /// <summary>
