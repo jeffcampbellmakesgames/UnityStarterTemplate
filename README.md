@@ -30,10 +30,11 @@ Unity Starter Template is a template project for making a game in Unity. It come
 
 <img width="473" alt="image" src="https://user-images.githubusercontent.com/1663648/210172973-f60fd1b7-f84c-489a-9ef1-58e1c4558914.png">
 
-4. Fetch all lfs objects from the template repository and then push them up to your own origin. This can be done with the following commands.
+4. Fetch and pull all lfs objects from the template repository and then push them up to your own origin. This can be done with the following commands.
 
 ```
 git lfs fetch template_origin
+git lfs pull template_origin
 git lfs push origin --all
 ```
 
