@@ -8,6 +8,7 @@ Unity Starter Template is a template project for making a game in Unity. It come
 ### Minimum Requirements
 * **Unity Version:** 2021.3.14f1 or Higher
 * **Scripting Runtime**: .Net 4.X
+* **GIT LFS**
 
 ### Third-party packages and plugins
 * [`JCMG Utility`](https://github.com/jeffcampbellmakesgames/jcmg-utility) => A general-purpose utility library for editor/runtime.
@@ -21,7 +22,20 @@ Unity Starter Template is a template project for making a game in Unity. It come
 * [`Graphy`](https://github.com/Tayx94/graphy) => Graphy is the ultimate, easy to use, feature packed FPS counter, stats monitor and debugger for your Unity project.
 
 ## How to Use
-On the top right of this github page, select the *Use this template* button. This will enable you to create your own version of this repository (can be made private or public).
+1. On the top right of this github page, select the *Use this template* button. This will enable you to create your own version of this repository (can be made private or public).
+
+2. One area Github's Template feature doesn't handle well is LFS which this repository has handled. To fix any broken LFS links, clone the repository locally.
+
+3. Add a remote repository to the original template (https://github.com/jeffcampbellmakesgames/UnityStarterTemplate.git). In this example I'm giving it the name `template_origin`.
+
+<img width="473" alt="image" src="https://user-images.githubusercontent.com/1663648/210172973-f60fd1b7-f84c-489a-9ef1-58e1c4558914.png">
+
+4. Fetch all lfs objects from the template repository and then push them up to your own origin. This can be done with the following commands.
+
+```
+git lfs fetch template_origin
+git lfs push origin --all
+```
 
 ## Support
 If this is useful to you and/or you’d like to see future development and more tools in the future, please consider supporting it by contributing to the Github project (i.e, submitting bug reports or features and/or creating pull requests) or by buying me coffee using any of the links below. Every little bit helps!
