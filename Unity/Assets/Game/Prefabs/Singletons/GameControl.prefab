@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e10b516c6b41e192481e0e72a58ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _savesAppSystem: {fileID: 11400000, guid: 0ed11ba8f265547bd9c24bc796093140, type: 2}
+  _progressionStore: {fileID: 11400000, guid: c5b0c1f0d5d3043d2bccdf2989eebf26, type: 2}
   _isInGameBoolVariable: {fileID: 11400000, guid: ce95624f0bf1a40148c748573407279a,
     type: 2}
   _gameEnteredEvent: {fileID: 11400000, guid: 4678e1dd543684338ad9e7b33d1cc9b4, type: 2}
   _gameExitedEvent: {fileID: 11400000, guid: 8b2d1995c37bf4fb8a65434d38956cb5, type: 2}
   _lobbySceneName: Lobby
-  _gameSceneName: Game

@@ -62,6 +62,10 @@ MonoBehaviour:
     _appSystemBehavior: {fileID: 0}
     _appSystemScriptableObject: {fileID: 11400000, guid: 3a2bf58d1486b4490bcb57ebba6f3aa7,
       type: 2}
+  - _sourceType: 1
+    _appSystemBehavior: {fileID: 0}
+    _appSystemScriptableObject: {fileID: 11400000, guid: 0ed11ba8f265547bd9c24bc796093140,
+      type: 2}
   _setupCompletedEvent: {fileID: 11400000, guid: 1c70bf000d57c4131a1672c7ef864912,
     type: 2}
   _lobbySceneName: Lobby
