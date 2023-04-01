@@ -5,6 +5,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Releases]
+### [0.7.0] - 2023-04-01
+#### Added
+* Added basic SaveAppSystem, LoadSavesUIScreen. This enables creating and loading previous save files.
+* Added LevelData and ProgressionStore to make it easier to create and reference scenes.
+
+#### Changed
+* Updated MainMenuUIScreen for save logic so that:
+    * When a player first starts the game they can either create a new game or go to the Settings.
+    * Once a player has created a new save file, when they return to the Main Menu a new option will appear for either "Continue" to continue playing the latest updated save file and "Load Save" for selecting a specific save file to use.
+
+#### Fixed
+* Modified `game-exit` command to only attempt exiting the current game if in-game.
+
+#### Removed
+* Removed `game-enter` command as entering a game is dependent on which save file to use.
+
+## [Releases]
 ### [0.6.0] - 2022-12-30
 #### Added
 * Implemented Graphics Settings UI to enable a player to modify their FPS target, resolution, and window style. When changed, a player can then hit a Apply Changes button to set thosen changes and either accept or reject them in a modal. If no input is provided the changes are automatically reverted after a short duration.
