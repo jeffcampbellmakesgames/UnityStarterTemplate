@@ -2,6 +2,7 @@ using JCMG.Slate;
 using NaughtyAttributes;
 using ScriptableObjectArchitecture;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Game
@@ -12,9 +13,18 @@ namespace Game
     /// </summary>
     public sealed class MainMenuUIScreen : UIScreen
     {
+        [FormerlySerializedAs("_playGameButton")]
         [BoxGroup(RuntimeConstants.UI_REFS)]
         [SerializeField, Required]
-        private Button _playGameButton;
+        private Button _newGameButton;
+
+        [BoxGroup(RuntimeConstants.UI_REFS)]
+        [SerializeField, Required]
+        private Button _continueButton;
+
+        [BoxGroup(RuntimeConstants.UI_REFS)]
+        [SerializeField, Required]
+        private Button _loadSavesButton;
 
         [BoxGroup(RuntimeConstants.UI_REFS)]
         [SerializeField, Required]
@@ -23,6 +33,10 @@ namespace Game
         [BoxGroup(RuntimeConstants.UI_REFS)]
         [SerializeField, Required]
         private Button _creditsGameButton;
+
+        [BoxGroup(RuntimeConstants.UI_REFS)]
+        [SerializeField, Required]
+        private SavesAppSystem _savesAppSystem;
 
         [BoxGroup(RuntimeConstants.EVENTS)]
         [SerializeField, Required]
@@ -36,47 +50,79 @@ namespace Game
         {
             base.Awake();
 
-            // Events
-            _playGameButton.onClick.AddListener(OnPlayGameButtonClicked);
+            // UI Events
+            _newGameButton.onClick.AddListener(OnNewGameButtonClicked);
             _settingsGameButton.onClick.AddListener(OnSettingsButtonClicked);
             _creditsGameButton.onClick.AddListener(OnCreditsButtonClicked);
+            _continueButton.onClick.AddListener(OnContinueSaveButton);
+            _loadSavesButton.onClick.AddListener(OnLoadSavesButton);
 
+            // Data Events
             _setupCompletedEvent.AddListener(OnAppSetupComplete);
             _gameExitedEvent.AddListener(OnGameExited);
+
+            // Singleton Events
+            GameControl.Instance.GameLoadingStarted += OnGameLoadingStarted;
         }
 
        protected override void OnDestroy()
         {
             base.OnDestroy();
 
-            // Events
-            _playGameButton.onClick.RemoveListener(OnPlayGameButtonClicked);
+            // UI Events
+            _newGameButton.onClick.RemoveListener(OnNewGameButtonClicked);
             _settingsGameButton.onClick.RemoveListener(OnSettingsButtonClicked);
             _creditsGameButton.onClick.RemoveListener(OnCreditsButtonClicked);
+            _continueButton.onClick.RemoveListener(OnContinueSaveButton);
+            _loadSavesButton.onClick.RemoveListener(OnLoadSavesButton);
 
+            // Data Events
             _setupCompletedEvent.RemoveListener(OnAppSetupComplete);
             _gameExitedEvent.RemoveListener(OnGameExited);
+
+            // Singleton Events
+            // Don't unsubscribe to these as the application would be quitting.
+            // GameControl.Instance.GameLoadingStarted -= OnGameLoadingStarted;
         }
 
-        /// <summary>
-        /// Invoked when <see cref="AppControl"/> has completed setup.
+       /// <inheritdoc />
+       public override void Show(bool immediate = false)
+       {
+           _continueButton.gameObject.SetActive(_savesAppSystem.HasAnySaveFiles);
+           _loadSavesButton.gameObject.SetActive(_savesAppSystem.HasAnySaveFiles);
+
+           base.Show(immediate);
+       }
+
+       /// <summary>
+        /// Invoked when the new game button is clicked.
         /// </summary>
-        private void OnAppSetupComplete()
-        {
-            Show();
+        private void OnNewGameButtonClicked()
+       {
+           var inputModalDialog = ModalWindow<InputModalWindow>.Create();
+           inputModalDialog
+               .SetHeader("Input Name")
+               .SetBody("Please select a profile name for this save file")
+               .SetInputField(OnProfileNameSubmitted, "", "Enter name here...")
+               .Show();
         }
 
-        /// <summary>
-        /// Invoked when the play game button is clicked.
-        /// </summary>
-        private void OnPlayGameButtonClicked()
-        {
-            GameControl.Instance.EnterGame();
+       /// <summary>
+       /// Invoked when a player submits a profile name.
+       /// </summary>
+       private void OnProfileNameSubmitted(string profileName)
+       {
+           // TODO If the profile name is blank, launch another modal indicating a non-blank name is required.
 
-            Hide();
-        }
+           // TODO Add validation for profile name to ensure it is not:
+           // * Blank
+           // * Safe for file name
 
-        /// <summary>
+           // Otherwise create the new game with this profile and start loading it.
+           GameControl.Instance.CreateNewGame(profileName);
+       }
+
+       /// <summary>
         /// Invoked when the settings button is clicked.
         /// </summary>
         private void OnSettingsButtonClicked()
@@ -96,11 +142,44 @@ namespace Game
         }
 
         /// <summary>
+        /// Invoked when the player chooses to continue a previous save.
+        /// </summary>
+        private void OnContinueSaveButton()
+        {
+            GameControl.Instance.EnterLastUpdatedGame();
+        }
+
+        /// <summary>
+        /// Invoked when the player chooses to load a previous save.
+        /// </summary>
+        private void OnLoadSavesButton()
+        {
+            var loadSavesUIScreen = UIScreenControl.GetPanel<LoadSavesUIScreen>();
+            loadSavesUIScreen.Show();
+        }
+
+        /// <summary>
+        /// Invoked when <see cref="AppControl"/> has completed setup.
+        /// </summary>
+        private void OnAppSetupComplete()
+        {
+            Show();
+        }
+
+        /// <summary>
         /// Invoked when the game is exited from back to the main menu.
         /// </summary>
         private void OnGameExited()
         {
             Show();
+        }
+
+        /// <summary>
+        /// Invoked when the game loading has begun.
+        /// </summary>
+        private void OnGameLoadingStarted()
+        {
+            Hide();
         }
     }
 }
