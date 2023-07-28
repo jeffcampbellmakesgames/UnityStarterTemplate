@@ -18,7 +18,20 @@ namespace Game
 		[SerializeField, Required]
 		private SettingsAppSystem _settingsAppSystem;
 
-		private void Awake()
+		[BoxGroup(RuntimeConstants.SYSTEMS)]
+		[SerializeField, Required]
+		private SavesAppSystem _savesAppSystem;
+
+		[BoxGroup(RuntimeConstants.DATA)]
+		[SerializeField, Required]
+		private ProgressionStore _progressionStore;
+
+		private GameControl _gameControl;
+
+		// Logs
+		private const string ONLY_IN_GAME_WARNING = "This command can only be executed when in-game.";
+
+		private void Start()
 		{
 			// Add all console commands that make use of local fields on this class as they cannot be made static.
 			// Pause commands
@@ -26,6 +39,12 @@ namespace Game
 				"pause-toggle",
 				"Toggles the pause state of the game on or off. Only works while the game is loaded.",
 				TogglePauseCommand);
+
+			// Save commands
+			DebugLogConsole.AddCommand(
+				"save-clear-all",
+				"Clears all save data files from the local system.",
+				DeleteAllSaveData);
 
 			// Graphics commands
 			DebugLogConsole.AddCommand(
@@ -47,6 +66,12 @@ namespace Game
 				"perf-ui-advanced",
 				"Configures the performance metrics UI for Advanced on or off. This does not hide or show the overlay.",
 				ToggleGraphyUIAdvancedCommand);
+
+			// Level commands
+			DebugLogConsole.AddCommand<string>(
+				"level-load",
+				"If in game, attempts to load a level using it's level symbol.",
+				LoadLevelGameCommand);
 		}
 
 		/// <summary>
@@ -60,15 +85,61 @@ namespace Game
 		}
 
 		/// <summary>
+		/// Deletes all save files from the local filesystem.
+		/// </summary>
+		public void DeleteAllSaveData()
+		{
+			_savesAppSystem.DeleteAllSaveData();
+		}
+
+		/// <summary>
 		/// Unloads the game scene and shows the main menu.
 		/// </summary>
 		[ConsoleMethod("game-exit", "Exits the game back to the main menu.")]
 		public static void ExitGameCommand()
 		{
-			if (GameControl.Instance.IsInGame)
+			if (!GameControl.Instance.IsInGame)
 			{
-				GameControl.Instance.ExitGame();
+				Debug.LogWarning(ONLY_IN_GAME_WARNING);
 			}
+
+			GameControl.Instance.ExitGame();
+		}
+
+		/// <summary>
+		/// Unloads the game scene and shows the main menu.
+		/// </summary>
+		public void LoadLevelGameCommand(string levelSymbol)
+		{
+			if (!GameControl.Instance.IsInGame)
+			{
+				Debug.LogWarning(ONLY_IN_GAME_WARNING);
+			}
+
+			if (_progressionStore.TryGetLevel(levelSymbol, out var levelData))
+			{
+				GameControl.Instance.GoToLevelData(levelData);
+			}
+			else
+			{
+				Debug.LogWarning($"Could not find level with symbol [{levelSymbol}].");
+			}
+		}
+
+		/// <summary>
+		/// Unloads the game scene and shows the main menu.
+		/// </summary>
+		[ConsoleMethod(
+			"level-complete",
+			"If in game, the current level is marked as completed and the next one is loaded.")]
+		public static void CompleteLevelGameCommand()
+		{
+			if (!GameControl.Instance.IsInGame)
+			{
+				Debug.LogWarning(ONLY_IN_GAME_WARNING);
+			}
+
+			GameControl.Instance.CompleteLevel();
 		}
 
 		/// <summary>

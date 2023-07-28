@@ -97,3 +97,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pauseAppSystem: {fileID: 11400000, guid: cc494e12eca85469a9206da8f8634a18, type: 2}
   _settingsAppSystem: {fileID: 11400000, guid: 14109dcff536646d3adf465a6662d25f, type: 2}
+  _savesAppSystem: {fileID: 11400000, guid: 0ed11ba8f265547bd9c24bc796093140, type: 2}
+  _progressionStore: {fileID: 11400000, guid: c5b0c1f0d5d3043d2bccdf2989eebf26, type: 2}

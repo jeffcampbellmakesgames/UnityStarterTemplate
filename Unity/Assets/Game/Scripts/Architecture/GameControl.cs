@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using IngameDebugConsole;
 using JCMG.Utility;
 using NaughtyAttributes;
@@ -13,8 +14,56 @@ namespace Game
 	/// <summary>
 	/// The app-wide control singleton managing game-specific setup and teardown.
 	/// </summary>
-	public sealed class GameControl : Singleton<GameControl>
+	public sealed partial class GameControl : Singleton<GameControl>, IAppSystem
 	{
+		[Serializable]
+		private class GameAppSystemRef
+		{
+			/// <summary>
+			/// Returns true if this app system ref is using a Monobehavior source or false if it's a ScriptableObject
+			/// source.
+			/// </summary>
+			public bool IsUsingMonobehaviorSource => _sourceType == SourceType.Monobehavior;
+
+			private enum SourceType
+			{
+				Monobehavior = 0,
+				ScriptableObject = 1
+			}
+
+			[SerializeField]
+			private SourceType _sourceType;
+
+			[AllowNesting, ShowIf("IsUsingMonobehaviorSource")]
+			[SerializeField]
+			private MonoBehaviour _appSystemBehavior;
+
+			[AllowNesting, HideIf("IsUsingMonobehaviorSource")]
+			[SerializeField]
+			private ScriptableGameSystem _appSystemScriptableObject;
+
+			public IGameSystem GetGameSystem()
+			{
+				IGameSystem result = null;
+				if (IsUsingMonobehaviorSource)
+				{
+					Assert.IsNotNull(_appSystemBehavior);
+					Assert.IsTrue(
+						_appSystemBehavior is IGameSystem,
+						$"{_appSystemBehavior.name} does not implement IAppSystem.");
+
+					result = _appSystemBehavior as IGameSystem;
+				}
+				else
+				{
+					Assert.IsNotNull(_appSystemScriptableObject);
+					result = _appSystemScriptableObject;
+				}
+
+				return result;
+			}
+		}
+
 		/// <summary>
 		/// Invoked when the game has begun to be loaded.
 		/// </summary>
@@ -38,6 +87,10 @@ namespace Game
 		[BoxGroup(RuntimeConstants.SYSTEMS)]
 		[SerializeField, Required]
 		private SavesAppSystem _savesAppSystem;
+
+		[Label("Game Systems")]
+		[SerializeField]
+		private List<GameAppSystemRef> _gameAppSystemRefs;
 
 		[BoxGroup(RuntimeConstants.DATA)]
 		[SerializeField, Required]
@@ -68,6 +121,42 @@ namespace Game
 
 			_isInGameBoolVariable.Value = false;
 		}
+
+		#region IAppSystem
+
+		/// <inheritdoc />
+		public void OneTimeSetup()
+		{
+			for (var i = 0; i < _gameAppSystemRefs.Count; i++)
+			{
+				var gameSystem = _gameAppSystemRefs[i].GetGameSystem();
+				gameSystem.OneTimeSetup();
+			}
+		}
+
+		/// <inheritdoc />
+		public void OneTimeTeardown()
+		{
+			for (var i = 0; i < _gameAppSystemRefs.Count; i++)
+			{
+				var gameSystem = _gameAppSystemRefs[i].GetGameSystem();
+				gameSystem.OneTimeTeardown();
+			}
+		}
+
+		/// <inheritdoc />
+		public bool IsSetupComplete()
+		{
+			var result = true;
+			for (var i = 0; i < _gameAppSystemRefs.Count; i++)
+			{
+				var gameSystem = _gameAppSystemRefs[i].GetGameSystem();
+				result &= gameSystem.IsSetupComplete();
+			}
+			return result;
+		}
+
+		#endregion
 
 		/// <summary>
 		/// Unloads the game scene and ends the game state.
@@ -153,6 +242,12 @@ namespace Game
 			var asyncOp = SceneManager.LoadSceneAsync(levelData.SceneName);
 			yield return new WaitUntil(() => asyncOp.isDone);
 
+			for (var i = 0; i < _gameAppSystemRefs.Count; i++)
+			{
+				var gameSystem = _gameAppSystemRefs[i].GetGameSystem();
+				gameSystem.Setup();
+			}
+
 			// Setup in-game state and signal that the game is loaded.
 			_isInGameBoolVariable.Value = true;
 			_currentLevelData = levelData;
@@ -169,9 +264,15 @@ namespace Game
 		/// </summary>
 		private IEnumerator ExitGameOverTime()
 		{
-			// Load the looby scene
+			// Load the lobby scene
 			var asyncOp = SceneManager.LoadSceneAsync(_lobbySceneName);
 			yield return new WaitUntil(() => asyncOp.isDone);
+
+			for (var i = 0; i < _gameAppSystemRefs.Count; i++)
+			{
+				var gameSystem = _gameAppSystemRefs[i].GetGameSystem();
+				gameSystem.Teardown();
+			}
 
 			// Setup in-game state and signal that the game is unloaded.
 			_isInGameBoolVariable.Value = false;
@@ -180,7 +281,7 @@ namespace Game
 
 			// Invoke any relevant events.
 			_gameExitedEvent.Raise();
-			
+
 			GameExited?.Invoke();
 
 			_loadCoroutine = null;
@@ -213,6 +314,41 @@ namespace Game
 
 				ExitGame();
 			}
+		}
+
+		/// <summary>
+		/// Returns true if a game system can be found of type <typeparamref name="T"/>, otherwise false. If true,
+		/// <paramref name="gameSystem"/> will be initialized.
+		/// </summary>
+		private bool TryGetGameSystem<T>(out T gameSystem)
+			where T : class, IGameSystem
+		{
+			gameSystem = null;
+			for (var i = 0; i < _gameAppSystemRefs.Count; i++)
+			{
+				var localGameSystem = _gameAppSystemRefs[i].GetGameSystem();
+				if (localGameSystem is T typedGameSystem)
+				{
+					gameSystem = typedGameSystem;
+					break;
+				}
+			}
+
+			return gameSystem != null;
+		}
+
+		/// <summary>
+		/// Returns a local game system of type <typeparamref name="T"/>. If one cannot be found, an exception is thrown.
+		/// </summary>
+		private T GetGameSystem<T>() where T : class, IGameSystem
+		{
+			T result = null;
+			if (!TryGetGameSystem(out result))
+			{
+				throw new Exception($"Cannot find GameSystem of type: [{typeof(T)}] in GameControl.");
+			}
+
+			return result;
 		}
 	}
 }
