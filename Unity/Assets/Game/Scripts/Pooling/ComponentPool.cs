@@ -125,6 +125,7 @@ namespace Game
 		{
 			// Un-parent the spawned instance from the owner of the pool.
 			instance.transform.SetParent(null);
+			instance.gameObject.SetActive(true);
 		}
 
 		/// <summary>
@@ -134,6 +135,7 @@ namespace Game
 		{
 			// Re-parent the recycled instance to the owner of the pool.
 			instance.transform.SetParent(_owner.transform);
+			instance.gameObject.SetActive(false);
 		}
 	}
 }
