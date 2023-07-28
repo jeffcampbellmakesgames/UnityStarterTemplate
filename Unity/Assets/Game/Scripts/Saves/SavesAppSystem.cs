@@ -4,8 +4,10 @@ using System.IO;
 using System.Linq;
 using NaughtyAttributes;
 using Newtonsoft.Json;
+using ScriptableObjectArchitecture;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 
 namespace Game
 {
@@ -17,6 +19,11 @@ namespace Game
 		menuName = "Game/Systems/SavesAppSystem")]
 	public sealed class SavesAppSystem : ScriptableAppSystem
 	{
+		/// <summary>
+		/// Invoked when a specific save file has been updated.
+		/// </summary>
+		public Action<SaveData> SaveDataUpdated;
+
 		/// <summary>
 		/// Returns true if there are any existing save files, otherwise false.
 		/// </summary>
@@ -42,13 +49,21 @@ namespace Game
 		/// </summary>
 		public string SaveFileDirectoryAbsolutePath => _saveFileDirectoryAbsolutePath;
 
+		[BoxGroup(RuntimeConstants.EVENTS)]
+		[SerializeField, Required]
+		private GameEvent _saveDataChanged;
+
 		[BoxGroup(RuntimeConstants.SETTINGS)]
 		[SerializeField]
 		private string _saveFolderName;
 
 		private List<SaveData> _loadedSaveFiles;
 		private Dictionary<string, SaveData> _loadedSaveFileLookupByFilePath;
+
+		[BoxGroup(RuntimeConstants.DEBUG)]
+		[ShowNonSerializedField, ReadOnly]
 		private string _saveFileDirectoryAbsolutePath;
+
 		private SaveData _currentSaveData;
 
 		/// <inheritdoc />
@@ -70,13 +85,17 @@ namespace Game
 			for (var i = 0; i < jsonFilePaths.Length; i++)
 			{
 				var filePath = jsonFilePaths[i];
-				var saveFile = JsonConvert.DeserializeObject<SaveData>(
+				var saveData = JsonConvert.DeserializeObject<SaveData>(
 					File.ReadAllText(filePath),
 					RuntimeConstants.JSON_SETTINGS);
-				if (saveFile != null)
+
+				// Load any runtime specific data into the save data.
+				LoadRuntimeOnlyData(saveData);
+
+				if (saveData != null)
 				{
-					_loadedSaveFiles.Add(saveFile);
-					_loadedSaveFileLookupByFilePath.Add(filePath, saveFile);
+					_loadedSaveFiles.Add(saveData);
+					_loadedSaveFileLookupByFilePath.Add(filePath, saveData);
 				}
 			}
 		}
@@ -96,6 +115,8 @@ namespace Game
 				lastLevelCompleted = string.Empty
 			};
 
+			LoadRuntimeOnlyData(newSaveData);
+
 			var saveFilePath = Path.Combine(_saveFileDirectoryAbsolutePath, newSaveData.GetSaveFileName());
 
 			_loadedSaveFiles.Add(newSaveData);
@@ -107,14 +128,7 @@ namespace Game
 		/// <inheritdoc />
 		public override void OneTimeTeardown()
 		{
-			// Flush all save files to disk.
-			foreach (var kvp in _loadedSaveFileLookupByFilePath)
-			{
-				var saveFileText = JsonConvert.SerializeObject(
-					kvp.Value,
-					RuntimeConstants.JSON_SETTINGS);
-				File.WriteAllText(kvp.Key, saveFileText);
-			}
+			FlushAllSaveDataToDisk();
 		}
 
 		/// <summary>
@@ -161,6 +175,8 @@ namespace Game
 		/// </summary>
 		public void DeleteAllSaveData()
 		{
+			Debug.Log($"Deleting {_loadedSaveFiles.Count} save files from the filesystem.");
+
 			for (var i = _loadedSaveFiles.Count - 1; i >= 0; i--)
 			{
 				var saveData = _loadedSaveFiles[i];
@@ -169,6 +185,61 @@ namespace Game
 
 			_loadedSaveFileLookupByFilePath.Clear();
 			_loadedSaveFiles.Clear();
+		}
+
+		/// <summary>
+		/// Flushes the current save data to disk if one is currently set.
+		/// </summary>
+		public void FlushCurrentSaveDataToDisk()
+		{
+			// if we have a current save file
+			if (HasCurrentSaveDataSet)
+			{
+				WriteSaveDataToDisk(CurrentSaveData);
+
+				SaveDataUpdated?.Invoke(CurrentSaveData);
+
+				_saveDataChanged.Raise();
+			}
+			else
+			{
+				Debug.LogWarning("No save data is currently set.");
+			}
+		}
+
+		/// <summary>
+		/// Flushes all save data assets to disk.
+		/// </summary>
+		public void FlushAllSaveDataToDisk()
+		{
+			// Flush all save files to disk.
+			foreach (var kvp in _loadedSaveFileLookupByFilePath)
+			{
+				var saveFileText = JsonConvert.SerializeObject(
+					kvp.Value,
+					RuntimeConstants.JSON_SETTINGS);
+				File.WriteAllText(kvp.Key, saveFileText);
+			}
+
+			_saveDataChanged.Raise();
+		}
+
+		/// <summary>
+		/// Writes a specific save file to disk.
+		/// </summary>
+		private void WriteSaveDataToDisk(SaveData saveData)
+		{
+			var saveFilePath = Path.Combine(_saveFileDirectoryAbsolutePath, saveData.GetSaveFileName());
+			var saveFileText = JsonConvert.SerializeObject(saveData, RuntimeConstants.JSON_SETTINGS);
+			File.WriteAllText(saveFilePath, saveFileText);
+		}
+
+		/// <summary>
+		/// Loads all necessary runtime-only data into <paramref name="saveData"/>.
+		/// </summary>
+		private void LoadRuntimeOnlyData(SaveData saveData)
+		{
+			// No-op
 		}
 	}
 }
