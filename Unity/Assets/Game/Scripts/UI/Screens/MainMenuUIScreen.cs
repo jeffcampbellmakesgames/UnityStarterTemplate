@@ -46,7 +46,13 @@ namespace Game
         [SerializeField, Required]
         private GameEvent _gameExitedEvent;
 
-        protected override void Awake()
+        [BoxGroup(RuntimeConstants.DATA)]
+        [SerializeField, Required]
+        private BoolVariable _isNewGameStartedBoolVariable;
+
+        private GameControl _gameControl;
+
+		protected override void Awake()
         {
             base.Awake();
 
@@ -62,7 +68,8 @@ namespace Game
             _gameExitedEvent.AddListener(OnGameExited);
 
             // Singleton Events
-            GameControl.Instance.GameLoadingStarted += OnGameLoadingStarted;
+            _gameControl = GameControl.Instance;
+            _gameControl.GameLoadingStarted += OnGameLoadingStarted;
         }
 
        protected override void OnDestroy()
@@ -81,8 +88,7 @@ namespace Game
             _gameExitedEvent.RemoveListener(OnGameExited);
 
             // Singleton Events
-            // Don't unsubscribe to these as the application would be quitting.
-            // GameControl.Instance.GameLoadingStarted -= OnGameLoadingStarted;
+            _gameControl.GameLoadingStarted -= OnGameLoadingStarted;
         }
 
        /// <inheritdoc />
@@ -98,8 +104,8 @@ namespace Game
         /// Invoked when the new game button is clicked.
         /// </summary>
         private void OnNewGameButtonClicked()
-       {
-           var inputModalDialog = ModalWindow<InputModalWindow>.Create();
+		{
+			var inputModalDialog = ModalWindow<InputModalWindow>.Create();
            inputModalDialog
                .SetHeader("Input Name")
                .SetBody("Please select a profile name for this save file")
@@ -112,11 +118,14 @@ namespace Game
        /// </summary>
        private void OnProfileNameSubmitted(string profileName)
        {
-           // TODO If the profile name is blank, launch another modal indicating a non-blank name is required.
+			// TODO If the profile name is blank, launch another modal indicating a non-blank name is required.
 
-           // TODO Add validation for profile name to ensure it is not:
-           // * Blank
-           // * Safe for file name
+			// TODO Add validation for profile name to ensure it is not:
+			// * Blank
+			// * Safe for file name
+
+			// Set the flag to indicate it's a new game.
+			_isNewGameStartedBoolVariable.Value = true;
 
            // Otherwise create the new game with this profile and start loading it.
            GameControl.Instance.CreateNewGame(profileName);
@@ -137,24 +146,27 @@ namespace Game
         /// Invoked when the credits button is clicked.
         /// </summary>
         private void OnCreditsButtonClicked()
-        {
-            // TODO
-        }
+		{
+			var creditsUIScreen = UIScreenControl.GetPanel<CreditsUIScreen>();
+			creditsUIScreen.Show();
+		}
 
         /// <summary>
         /// Invoked when the player chooses to continue a previous save.
         /// </summary>
         private void OnContinueSaveButton()
         {
-            GameControl.Instance.EnterLastUpdatedGame();
+	        _isNewGameStartedBoolVariable.Value = false;
+
+			GameControl.Instance.EnterLastUpdatedGame();
         }
 
         /// <summary>
         /// Invoked when the player chooses to load a previous save.
         /// </summary>
         private void OnLoadSavesButton()
-        {
-            var loadSavesUIScreen = UIScreenControl.GetPanel<LoadSavesUIScreen>();
+		{
+			var loadSavesUIScreen = UIScreenControl.GetPanel<LoadSavesUIScreen>();
             loadSavesUIScreen.Show();
         }
 

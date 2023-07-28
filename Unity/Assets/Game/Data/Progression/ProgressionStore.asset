@@ -15,6 +15,6 @@ MonoBehaviour:
   _levels:
   - _symbolReference:
       _useConstant: 1
-      _constantValue: First Level
+      _constantValue: FirstLevel
       _variable: {fileID: 0}
     _sceneName: ExampleLevel
