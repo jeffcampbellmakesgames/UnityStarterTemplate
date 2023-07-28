@@ -5,6 +5,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Releases]
+### [0.8.0] - 2023-06-28
+#### Added
+* Added new console commands:
+	* `level-load` => Attempts to load a level by string symbol. Can only be used in-game.
+	* `level-complete` => Attempts to complete the current level and proceed to the next one, or if there isn't one returns back to the lobby scene.
+	* `save-clear-all` => Clears all save data from memory and deletes all save files on disk.
+* Game systems can now be created in a similar way to App systems (as a scriptable object derived from `ScriptableGameSystem` or a monobehavior implementing `IGameSystem`), except these are setup and torn down when the game is started or exited from (can be multiple times per app session). Game systems must be added to the list of game systems on `GameControl`.
+* Added several new UIScreen templates. These are present in the PreloadUI scene.
+	* `GameOverUIScreen` => Can be used for game overs.
+	* `CreditsUIScreen` => Shows credits for development on game. Can be shown when a player clicks the credits button on the `MainMenuUIScreen`.
+	* `LoadingUIScreen` => A loading screen that currently has a fade in/out animation. Useful for transitions between scenes.
+
+#### Changed
+* Modified `SavesAppSystem` to include new methods for flushing save data to disk at runtime and to invoke an event `SaveDataUpdated` whenever this is done.
+* Modified `SavesAppSystem` to include a hook for adding runtime-only data to save files on load.
+
+#### Fixed
+* Modified ComponentPool to enable and disable pooled items when spawned or recycled.
+
+#### Added
+* Added basic SaveAppSystem, LoadSavesUIScreen. This enables creating and loading previous save files.
+* Added LevelData and ProgressionStore to make it easier to create and reference scenes.
+
 ### [0.7.0] - 2023-04-01
 #### Added
 * Added basic SaveAppSystem, LoadSavesUIScreen. This enables creating and loading previous save files.
