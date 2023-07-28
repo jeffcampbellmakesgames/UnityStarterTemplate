@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Releases]
+### [0.8.1] - 2023-06-28
+#### Added
+* Added extension methods for `ISymbolObject`
+
+#### Modified
+* Modified .gitattributes to include LFS tracking for many different types of executable and assembly files, force all C# files to use LF line endings.
+
 ### [0.8.0] - 2023-06-28
 #### Added
 * Added new console commands:
