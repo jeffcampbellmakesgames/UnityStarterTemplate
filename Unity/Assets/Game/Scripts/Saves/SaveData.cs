@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Game
 {
-	[JsonObject]
+	[JsonObject, Serializable]
 	public sealed class SaveData
 	{
 		/// <summary>
@@ -35,5 +35,10 @@ namespace Game
 		/// Returns the formatted file name for this save file.
 		/// </summary>
 		public string GetSaveFileName() => $"{id}.json";
+
+		public SaveData()
+		{
+
+		}
 	}
 }

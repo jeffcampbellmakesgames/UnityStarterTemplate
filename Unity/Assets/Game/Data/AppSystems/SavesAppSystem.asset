@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d8a5b5803b4b58a3fd0f3cb390bb01, type: 3}
   m_Name: SavesAppSystem
   m_EditorClassIdentifier: 
+  _saveDataChanged: {fileID: 11400000, guid: 8b0fc2be715373a429ac194c39535583, type: 2}
   _saveFolderName: Saves
