@@ -222,7 +222,7 @@ namespace Game
 				_desiredResolution.width,
 				_desiredResolution.height,
 				_desiredFullScreenMode,
-				_desiredResolution.refreshRate);
+				_desiredResolution.refreshRateRatio);
 
 			// Show a modal prompting the player about the changes.
 			var modalWindow = SimpleModalWindow.Create();
@@ -259,7 +259,7 @@ namespace Game
 				_desiredResolution.width,
 				_desiredResolution.height,
 				_desiredFullScreenMode,
-				_desiredResolution.refreshRate);
+				_desiredResolution.refreshRateRatio);
 
 			StartCoroutine(DelayedCacheOfGraphicsFields());
 		}

@@ -9,7 +9,7 @@ namespace Game
 	/// <summary>
 	/// Displays configurable settings to the player.
 	/// </summary>
-	public sealed class SettingsUIScreen : UIScreen
+	public sealed class SettingsUIScreen : UIScreenBase
 	{
 		[BoxGroup(RuntimeConstants.UI_REFS)]
 		[SerializeField, Required]
@@ -81,7 +81,7 @@ namespace Game
 		{
 			if (!_isInGameBoolVariable)
 			{
-				var mainMenuUIScreen = UIScreenControl.GetPanel<MainMenuUIScreen>();
+				var mainMenuUIScreen = UIScreenControl.GetScreen<MainMenuUIScreen>();
 				mainMenuUIScreen.Show(immediate:true);
 			}
 

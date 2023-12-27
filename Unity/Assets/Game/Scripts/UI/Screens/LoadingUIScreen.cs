@@ -9,7 +9,7 @@ namespace Game
 	/// <summary>
 	/// Represents a loading screen.
 	/// </summary>
-	public sealed class LoadingUIScreen : UIScreen
+	public sealed class LoadingUIScreen : UIScreenBase
 	{
 		/// <summary>
 		/// Returns true if this screen is currently animating, otherwise false.

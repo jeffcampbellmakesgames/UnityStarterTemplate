@@ -8,7 +8,7 @@ namespace Game
 	/// <summary>
 	/// A UI screen to display Game Over information.
 	/// </summary>
-	public sealed class GameOverUIScreen : UIScreen
+	public sealed class GameOverUIScreen : UIScreenBase
 	{
 		[BoxGroup(RuntimeConstants.UI_REFS)]
 		[SerializeField, Required]

@@ -10,7 +10,7 @@ namespace Game
 	/// <summary>
 	/// A <see cref="UIScreen"/> for loading saves.
 	/// </summary>
-	public sealed class LoadSavesUIScreen : UIScreen
+	public sealed class LoadSavesUIScreen : UIScreenBase
 	{
 		[BoxGroup(RuntimeConstants.UI_REFS)]
 		[SerializeField, Required]
