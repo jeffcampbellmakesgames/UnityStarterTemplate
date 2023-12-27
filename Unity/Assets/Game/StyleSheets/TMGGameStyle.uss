@@ -1,0 +1,37 @@
+* {
+    -unity-font: url('project://database/Assets/Game/Fonts/Urbanist/Urbanist-VariableFont_wght.ttf?fileID=12800000&guid=60cfd9f8585a34864ad23a075380b230&type=3#Urbanist-VariableFont_wght');
+    -unity-font-definition: url('project://database/Assets/Game/Fonts/Urbanist/Urbanist-VariableFont_wght%20SDF.asset?fileID=11400000&guid=78e4a905def384f3ebc70a861aafa9a2&type=2#Urbanist-VariableFont_wght SDF');
+}
+
+Button {
+    transition-property: all;
+    transition-duration: 0.33s;
+}
+
+Button:hover {
+    transition-property: scale;
+    scale: 1.05 1.05;
+    transition-duration: 0.33s;
+    transition-timing-function: ease-in-out;
+}
+
+Button:active {
+    transition-property: translate;
+    transition-timing-function: ease-out-bounce;
+    transition-duration: 0.33s;
+    scale: 1.1 1.1;
+}
+
+.start-button {
+    border-radius: 30px;
+    border-width: 5px;
+    font-size: 48px;
+    background-color: rgb(77, 141, 183);
+    border-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 1px rgb(0, 0, 0);
+    -unity-font-style: bold;
+    margin: 5px;
+    padding: 5px;
+    height: 70px;
+}

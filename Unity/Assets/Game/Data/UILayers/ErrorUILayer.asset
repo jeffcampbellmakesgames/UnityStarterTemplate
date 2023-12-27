@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34e18ca90c0d744888bb6a693ae3c90, type: 3}
   m_Name: ErrorUILayer
   m_EditorClassIdentifier: 
-  _sortingLayer: 400
+  _sortingLayer: 500

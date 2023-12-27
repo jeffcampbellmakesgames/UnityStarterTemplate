@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1677456425179776371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5346155388507024391}
+  - component: {fileID: 414716140355482103}
+  - component: {fileID: 6821948362051129752}
+  - component: {fileID: -5751078266542917746}
+  m_Layer: 5
+  m_Name: MainMenuUIScreenDocument
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5346155388507024391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677456425179776371}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &414716140355482103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677456425179776371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 2e43b449a353f4dac9e2afc8d3c7076e, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: a59da847e1d1c46af8bda70e315214f5,
+    type: 3}
+  m_SortingOrder: 0
+--- !u!114 &6821948362051129752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677456425179776371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0db4d8c8b5c3e4c59b7767873182fba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiDocument: {fileID: 414716140355482103}
+  _isInteractable: 1
+  _layer: {fileID: 11400000, guid: 3ccbffbf504b140c4bf8103a62c95dbe, type: 2}
+  _startupMode: 0
+  _visibleClassOverride: 
+  _hiddenClassOverride: 
+  _isVisible: 0
+  _savesAppSystem: {fileID: 11400000, guid: 0ed11ba8f265547bd9c24bc796093140, type: 2}
+  _setupCompletedEvent: {fileID: 11400000, guid: 1c70bf000d57c4131a1672c7ef864912,
+    type: 2}
+  _gameExitedEvent: {fileID: 11400000, guid: 8b2d1995c37bf4fb8a65434d38956cb5, type: 2}
+  _isNewGameStartedBoolVariable: {fileID: 11400000, guid: 01a0cbf87a7ca44218bf7ac289fe7a0b,
+    type: 2}
+--- !u!114 &-5751078266542917746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677456425179776371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7469279faa1362e489c0e58bf142418d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
