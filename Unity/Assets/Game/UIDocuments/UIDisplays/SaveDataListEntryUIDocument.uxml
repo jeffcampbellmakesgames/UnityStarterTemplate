@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/StyleSheets/TMGGameStyle.uss?fileID=7433441132597879392&amp;guid=565cfba2753e64aa2a70c0c45ac97e3d&amp;type=3#TMGGameStyle" />
+    <ui:VisualElement name="VisualElement" class="save-data-list-item">
+        <ui:VisualElement style="flex-grow: 1; align-items: stretch; justify-content: flex-start; flex-direction: row;">
+            <ui:Label tabindex="-1" text="Profile:" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 36px; -unity-text-align: middle-left; -unity-font-style: bold;" />
+            <ui:Label tabindex="-1" text="Jeff" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ProfileNameLabel" style="align-self: stretch; flex-grow: 1; -unity-text-align: middle-left; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; font-size: 36px;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; align-items: stretch; justify-content: flex-start; flex-direction: row;">
+            <ui:Label tabindex="-1" text="Last Updated:" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 36px; -unity-text-align: middle-left; -unity-font-style: bold;" />
+            <ui:Label tabindex="-1" text="11/2/2023" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LastUpdatedLabel" style="align-self: stretch; flex-grow: 1; -unity-text-align: middle-left; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; font-size: 36px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

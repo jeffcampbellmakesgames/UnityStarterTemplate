@@ -80,7 +80,6 @@ namespace Game
 			_gameControl.GameLoadingStarted -= OnGameLoadingStarted;
 		}
 
-
 		/// <inheritdoc />
 		public new void Show(bool immediate = false)
 		{
@@ -156,8 +155,10 @@ namespace Game
 		/// </summary>
 		private void OnLoadSavesButton()
 		{
-			var loadSavesUIScreen = UIScreenControl.GetScreen<LoadSavesUIScreen>();
+			var loadSavesUIScreen = UIScreenControl.GetScreen<LoadSavesUIScreenDocument>();
 			loadSavesUIScreen.Show();
+
+			//Hide();
 		}
 
 		/// <summary>

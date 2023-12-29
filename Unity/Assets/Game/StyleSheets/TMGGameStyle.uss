@@ -22,6 +22,26 @@ Button:active {
     scale: 1.1 1.1;
 }
 
+.title {
+    font-size: 120px;
+}
+
+.h1 {
+    font-size: 64px;
+}
+
+.h2 {
+    font-size: 56px;
+}
+
+.h3 {
+    font-size: 48px;
+}
+
+.h4 {
+    font-size: 40px;
+}
+
 .start-button {
     border-radius: 30px;
     border-width: 5px;
@@ -34,4 +54,36 @@ Button:active {
     margin: 5px;
     padding: 5px;
     height: 70px;
+}
+
+.main-background {
+    flex-grow: 1;
+    background-color: rgb(255, 255, 255);
+}
+
+.save-data-list-item {
+    justify-content: flex-start;
+    align-self: stretch;
+    flex-grow: 1;
+    flex-shrink: 1;
+    align-items: auto;
+    background-color: rgb(255, 249, 249);
+    border-color: rgb(0, 0, 0);
+    border-width: 3px;
+    border-radius: 25px;
+    padding: 10px;
+}
+
+.list-item-container {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(0, 0, 0);
+}
+
+.list-item-container.unity-collection-view__item--selected {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(21, 21, 21);
+}
+
+.unity-list-view__empty-label {
+    display: none;
 }

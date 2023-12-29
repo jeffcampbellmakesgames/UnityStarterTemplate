@@ -59,6 +59,12 @@ namespace Game
 
 		public override void Show(bool immediate = false)
 		{
+			// If already visible or animating to being shown, return
+			if (IsVisible || _isShowing)
+			{
+				return;
+			}
+
 			base.Show(immediate);
 
 			_gameplayUIPanel.Show();
