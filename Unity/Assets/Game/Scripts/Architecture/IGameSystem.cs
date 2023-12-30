@@ -14,5 +14,10 @@ namespace Game
 		/// A one-time teardown method called when the game is exited.
 		/// </summary>
 		void Teardown();
+
+		/// <summary>
+		/// Executes once per frame, if the system setup has completed.
+		/// </summary>
+		void ExecutePerFrame();
 	}
 }

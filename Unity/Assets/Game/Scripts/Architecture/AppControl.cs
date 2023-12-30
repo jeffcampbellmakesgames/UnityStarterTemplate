@@ -24,9 +24,6 @@ namespace Game
             /// </summary>
             public bool IsUsingMonobehaviorSource => _sourceType == SourceType.Monobehavior;
 
-            public bool DoesMonobehaviorImplementIAppSystem => //!IsUsingMonobehaviorSource ||
-                                                               _appSystemBehavior is IAppSystem;
-
             private enum SourceType
             {
                 Monobehavior = 0,
@@ -80,8 +77,16 @@ namespace Game
         private GameEvent _setupCompletedEvent;
 
         [BoxGroup(RuntimeConstants.SETTINGS)]
-        [SerializeField, Scene]
+        [SerializeField]
+        private bool _useLobbyScene;
+
+        [BoxGroup(RuntimeConstants.SETTINGS)]
+        [SerializeField, Scene, EnableIf("_useLobbyScene")]
         private string _lobbySceneName;
+
+        [BoxGroup(RuntimeConstants.DEBUG)]
+        [SerializeField]
+        private bool _enterGameOnSetupComplete;
 
         private List<IAppSystem> _appSystems;
 
@@ -111,6 +116,11 @@ namespace Game
             {
                 SetupCompleted?.Invoke();
                 _setupCompletedEvent.Raise();
+
+                if (_enterGameOnSetupComplete)
+                {
+                    GameControl.Instance.EnterGameForSaveData(new SaveData());
+                }
             }
             else
             {
@@ -135,13 +145,21 @@ namespace Game
             // Wait for all app systems to be setup
             yield return new WaitWhile(() => !AreAllAppSystemsSetup());
 
-            // Load the lobby scene
-            var asyncOp = SceneManager.LoadSceneAsync(_lobbySceneName);
-            yield return new WaitUntil(() => asyncOp.isDone);
+            // Load the lobby scene, if one is specified
+            if (_useLobbyScene)
+            {
+                var asyncOp = SceneManager.LoadSceneAsync(_lobbySceneName);
+                yield return new WaitUntil(() => asyncOp.isDone);
+            }
 
             // Signal that the app setup has completed.
             SetupCompleted?.Invoke();
             _setupCompletedEvent.Raise();
+
+            if (_enterGameOnSetupComplete)
+            {
+                GameControl.Instance.EnterGameForSaveData(new SaveData());
+            }
         }
 
         /// <summary>

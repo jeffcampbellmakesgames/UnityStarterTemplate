@@ -36,7 +36,7 @@ namespace Game
 
 			[AllowNesting, ShowIf("IsUsingMonobehaviorSource")]
 			[SerializeField]
-			private MonoBehaviour _appSystemBehavior;
+			private MonoBehaviour _gameSystemBehavior;
 
 			[AllowNesting, HideIf("IsUsingMonobehaviorSource")]
 			[SerializeField]
@@ -47,12 +47,12 @@ namespace Game
 				IGameSystem result = null;
 				if (IsUsingMonobehaviorSource)
 				{
-					Assert.IsNotNull(_appSystemBehavior);
+					Assert.IsNotNull(_gameSystemBehavior);
 					Assert.IsTrue(
-						_appSystemBehavior is IGameSystem,
-						$"{_appSystemBehavior.name} does not implement IAppSystem.");
+						_gameSystemBehavior is IGameSystem,
+						$"{_gameSystemBehavior.name} does not implement IGameSystem.");
 
-					result = _appSystemBehavior as IGameSystem;
+					result = _gameSystemBehavior as IGameSystem;
 				}
 				else
 				{
@@ -84,6 +84,29 @@ namespace Game
 		/// </summary>
 		public bool IsInGame => _isInGameBoolVariable.Value;
 
+		/// <summary>
+		/// A lazy-load list of game systems.
+		/// </summary>
+		private List<IGameSystem> GameSystems
+		{
+			get
+			{
+				if (_gameSystems == null)
+				{
+					_gameSystems = new List<IGameSystem>();
+
+					for (var i = 0; i < _gameAppSystemRefs.Count; i++)
+					{
+						var gameSystem = _gameAppSystemRefs[i].GetGameSystem();
+
+						_gameSystems.Add(gameSystem);
+					}
+				}
+
+				return _gameSystems;
+			}
+		}
+
 		[BoxGroup(RuntimeConstants.SYSTEMS)]
 		[SerializeField, Required]
 		private SavesAppSystem _savesAppSystem;
@@ -109,11 +132,21 @@ namespace Game
 		private GameEvent _gameExitedEvent;
 
 		[BoxGroup(RuntimeConstants.SETTINGS)]
-		[SerializeField, Scene]
+		[SerializeField]
+		private bool _useLobbyScene;
+
+		[BoxGroup(RuntimeConstants.SETTINGS)]
+		[SerializeField, Scene, EnableIf("_useLobbyScene")]
 		private string _lobbySceneName;
+
+		[BoxGroup(RuntimeConstants.SETTINGS)]
+		[SerializeField]
+		private bool _useProgressionSystem;
 
 		private Coroutine _loadCoroutine;
 		private LevelData _currentLevelData;
+
+		private List<IGameSystem> _gameSystems;
 
 		protected override void Awake()
 		{
@@ -127,9 +160,9 @@ namespace Game
 		/// <inheritdoc />
 		public void OneTimeSetup()
 		{
-			for (var i = 0; i < _gameAppSystemRefs.Count; i++)
+			for (var i = 0; i < GameSystems.Count; i++)
 			{
-				var gameSystem = _gameAppSystemRefs[i].GetGameSystem();
+				var gameSystem = GameSystems[i];
 				gameSystem.OneTimeSetup();
 			}
 		}
@@ -137,9 +170,9 @@ namespace Game
 		/// <inheritdoc />
 		public void OneTimeTeardown()
 		{
-			for (var i = 0; i < _gameAppSystemRefs.Count; i++)
+			for (var i = 0; i < GameSystems.Count; i++)
 			{
-				var gameSystem = _gameAppSystemRefs[i].GetGameSystem();
+				var gameSystem = GameSystems[i];
 				gameSystem.OneTimeTeardown();
 			}
 		}
@@ -148,15 +181,35 @@ namespace Game
 		public bool IsSetupComplete()
 		{
 			var result = true;
-			for (var i = 0; i < _gameAppSystemRefs.Count; i++)
+			for (var i = 0; i < GameSystems.Count; i++)
 			{
-				var gameSystem = _gameAppSystemRefs[i].GetGameSystem();
+				var gameSystem = GameSystems[i];
 				result &= gameSystem.IsSetupComplete();
 			}
 			return result;
 		}
 
 		#endregion
+
+		private void Update()
+		{
+			// If not in-game, do nothing.
+			if (!IsInGame)
+			{
+				return;
+			}
+
+			// Otherwise execute each game system's per-frame method if it is setup.
+			for (var i = 0; i < GameSystems.Count; i++)
+			{
+				var gameSystem = GameSystems[i];
+				if (!gameSystem.IsSetupComplete())
+				{
+					return;
+				}
+				gameSystem.ExecutePerFrame();
+			}
+		}
 
 		/// <summary>
 		/// Unloads the game scene and ends the game state.
@@ -197,15 +250,18 @@ namespace Game
 		{
 			_savesAppSystem.SetCurrentSaveData(saveData);
 
-			// If there isn't a last level completed, load the first one.
 			LevelData levelData = null;
-			if (string.IsNullOrEmpty(saveData.lastLevelCompleted))
+			if (_useProgressionSystem)
 			{
-				levelData = _progressionStore.GetFirstLevel();
-			}
-			else if (!_progressionStore.TryGetLevel(saveData.lastLevelCompleted, out levelData))
-			{
-				levelData = _progressionStore.GetFirstLevel();
+				// If there isn't a last level completed, load the first one.
+				if (string.IsNullOrEmpty(saveData.lastLevelCompleted))
+				{
+					levelData = _progressionStore.GetFirstLevel();
+				}
+				else if (!_progressionStore.TryGetLevel(saveData.lastLevelCompleted, out levelData))
+				{
+					levelData = _progressionStore.GetFirstLevel();
+				}
 			}
 
 			LoadLevelData(levelData);
@@ -233,18 +289,21 @@ namespace Game
 		/// <summary>
 		/// Loads and sets up the game scene over time.
 		/// </summary>
-		private IEnumerator EnterGameOverTime(LevelData levelData)
+		private IEnumerator EnterGameOverTime(LevelData levelData = null)
 		{
 			// Broadcast that the game loading has started.
 			GameLoadingStarted?.Invoke();
 
 			// Load the game scene
-			var asyncOp = SceneManager.LoadSceneAsync(levelData.SceneName);
-			yield return new WaitUntil(() => asyncOp.isDone);
-
-			for (var i = 0; i < _gameAppSystemRefs.Count; i++)
+			if (levelData != null)
 			{
-				var gameSystem = _gameAppSystemRefs[i].GetGameSystem();
+				var asyncOp = SceneManager.LoadSceneAsync(levelData.SceneName);
+				yield return new WaitUntil(() => asyncOp.isDone);
+			}
+
+			for (var i = 0; i < GameSystems.Count; i++)
+			{
+				var gameSystem = GameSystems[i];
 				gameSystem.Setup();
 			}
 
@@ -265,12 +324,15 @@ namespace Game
 		private IEnumerator ExitGameOverTime()
 		{
 			// Load the lobby scene
-			var asyncOp = SceneManager.LoadSceneAsync(_lobbySceneName);
-			yield return new WaitUntil(() => asyncOp.isDone);
-
-			for (var i = 0; i < _gameAppSystemRefs.Count; i++)
+			if (_useLobbyScene)
 			{
-				var gameSystem = _gameAppSystemRefs[i].GetGameSystem();
+				var asyncOp = SceneManager.LoadSceneAsync(_lobbySceneName);
+				yield return new WaitUntil(() => asyncOp.isDone);
+			}
+
+			for (var i = 0; i < GameSystems.Count; i++)
+			{
+				var gameSystem = GameSystems[i];
 				gameSystem.Teardown();
 			}
 
@@ -320,13 +382,13 @@ namespace Game
 		/// Returns true if a game system can be found of type <typeparamref name="T"/>, otherwise false. If true,
 		/// <paramref name="gameSystem"/> will be initialized.
 		/// </summary>
-		private bool TryGetGameSystem<T>(out T gameSystem)
+		public bool TryGetGameSystem<T>(out T gameSystem)
 			where T : class, IGameSystem
 		{
 			gameSystem = null;
-			for (var i = 0; i < _gameAppSystemRefs.Count; i++)
+			for (var i = 0; i < GameSystems.Count; i++)
 			{
-				var localGameSystem = _gameAppSystemRefs[i].GetGameSystem();
+				var localGameSystem = GameSystems[i];
 				if (localGameSystem is T typedGameSystem)
 				{
 					gameSystem = typedGameSystem;
@@ -340,7 +402,7 @@ namespace Game
 		/// <summary>
 		/// Returns a local game system of type <typeparamref name="T"/>. If one cannot be found, an exception is thrown.
 		/// </summary>
-		private T GetGameSystem<T>() where T : class, IGameSystem
+		public T GetGameSystem<T>() where T : class, IGameSystem
 		{
 			T result = null;
 			if (!TryGetGameSystem(out result))

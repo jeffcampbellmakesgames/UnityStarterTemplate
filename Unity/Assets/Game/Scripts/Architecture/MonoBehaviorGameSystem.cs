@@ -3,34 +3,33 @@ using UnityEngine;
 namespace Game
 {
 	/// <summary>
-	/// Represents a scriptable game system.
+	/// Represents a in-scene game system.
 	/// </summary>
-	public abstract class ScriptableGameSystem : ScriptableObject, IGameSystem
+	public abstract class MonoBehaviorGameSystem : MonoBehaviour, IGameSystem
 	{
-		protected bool _isSetup;
-
 		/// <inheritdoc />
 		public virtual void OneTimeSetup()
 		{
-			// No-Op
-			_isSetup = true;
+			// No-op
 		}
 
 		/// <inheritdoc />
 		public virtual void OneTimeTeardown()
 		{
-			// No-Op
-			_isSetup = false;
+			// No-op
 		}
 
 		/// <inheritdoc />
-		public virtual bool IsSetupComplete() => _isSetup;
+		public virtual bool IsSetupComplete()
+		{
+			// No-op
+			return true;
+		}
 
 		/// <inheritdoc />
 		public virtual void Setup()
 		{
 			// No-op
-			_isSetup = true;
 		}
 
 		/// <inheritdoc />
