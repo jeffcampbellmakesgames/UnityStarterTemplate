@@ -27,13 +27,21 @@ MonoBehaviour:
     - Intelx64
     - Apple Silicon
     - Universal
+    isFlag: 0
   - variantName: Build Output
     selectedIndex: 0
     values:
     - App
     - Xcode Project
+    isFlag: 0
+  scriptingBackends:
+  - scriptingImplementation: 0
+    name: Mono
+    enabled: 0
+  - scriptingImplementation: 1
+    name: IL2CPP
+    enabled: 1
   platformName: macOS
-  dataDirNameFormat: '{0}.app/Contents'
   targetGroup: 1
 --- !u!114 &-1696757852317676747
 MonoBehaviour:
@@ -65,8 +73,15 @@ MonoBehaviour:
     values:
     - App
     - Visual Studio Solution
+    isFlag: 0
+  scriptingBackends:
+  - scriptingImplementation: 0
+    name: Mono
+    enabled: 0
+  - scriptingImplementation: 1
+    name: IL2CPP
+    enabled: 1
   platformName: PC
-  dataDirNameFormat: '{0}_Data'
   targetGroup: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -84,9 +99,10 @@ MonoBehaviour:
     baseBuildFolder: ../Builds
     buildPath: $VERSION/$RELEASE_TYPE/$PLATFORM/$ARCHITECTURE
     openFolderPostBuild: 1
+    constantsFileLocation: Assets/SuperUnityBuild
   _productParameters:
-    buildCounter: 1
-    buildVersion: 1.0.0.1
+    buildCounter: 3
+    buildVersion: 1.0.0.3
     versionTemplate: 1.0.0.$BUILD
     autoGenerate: 1
     syncWithPlayerSettings: 0
@@ -96,37 +112,49 @@ MonoBehaviour:
       bundleIdentifier: com.UnityTechnologies.com.unity.template-starter-kit
       companyName: DefaultCompany
       productName: Unity
+      syncAppNameWithProduct: 1
+      appBuildName: Unity
       buildOptions: 1
       customDefines: 
       sceneList:
-        enabledScenes:
+        releaseScenes:
         - fileGUID: 2552ff0b72fdc4d058525d5cd6bca2d2
+          sceneActive: 1
         - fileGUID: df2e9b111d04649ddbe8a269fafa0d67
+          sceneActive: 1
+        - fileGUID: 5db1fe34348474579bb82a01b36dfe8a
+          sceneActive: 1
         - fileGUID: 88719f96c15ac4c3f95f0c4887e3ff88
+          sceneActive: 1
+        - fileGUID: 48dcb8fb2e2c44cbb930d01dc9567ae2
+          sceneActive: 1
   _platformList:
     platforms:
     - {fileID: -7844251997202118530}
     - {fileID: -1696757852317676747}
   _projectConfigurations:
     configSet:
-      _Buckets: 03000000ffffffff0000000002000000ffffffffffffffff04000000
-      _HashCodes: 2b54ab488f6e234b29c6d86083c47952a76761490000000000000000
-      _Next: ffffffffffffffffffffffff01000000ffffffff0000000000000000
-      _Count: 5
-      _Version: 5
+      _Buckets: 05000000030000000100000004000000ffffffffffffffff06000000
+      _HashCodes: 04f4111e2b54ab488f6e234bf665e40829c6d86083c47952a7676149
+      _Next: ffffffffffffffffffffffff00000000ffffffff02000000ffffffff
+      _Count: 7
+      _Version: 7
       _FreeList: -1
       _FreeCount: 0
       _Keys:
+      - Development/macOS/macOS (Intelx64,App)/IL2CPP
       - Development/macOS/macOS (Intelx64,App)
       - Development/macOS
+      - Development/PC/Windows x64 (App)/IL2CPP
       - Development/PC/Windows x64 (App)
       - Development/PC
       - Development
-      - 
-      - 
       _Values:
       - enabled: 1
         childKeys: []
+      - enabled: 1
+        childKeys:
+        - Development/macOS/macOS (Intelx64,App)/IL2CPP
       - enabled: 1
         childKeys:
         - Development/macOS/macOS (Intelx64,App)
@@ -134,21 +162,20 @@ MonoBehaviour:
         childKeys: []
       - enabled: 1
         childKeys:
+        - Development/PC/Windows x64 (App)/IL2CPP
+      - enabled: 1
+        childKeys:
         - Development/PC/Windows x64 (App)
       - enabled: 1
         childKeys:
         - Development/macOS
         - Development/PC
-      - enabled: 1
-        childKeys: []
-      - enabled: 1
-        childKeys: []
     showViewOptions: 0
     showConfigs: 0
     showBuildInfo: 0
     hideDisabled: 0
     treeView: 0
-    selectedKeyChain: 
+    selectedKeyChain: Development/PC/Windows x64 (App)/Mono
   _preBuildActions:
     buildActions: []
   _postBuildActions:
