@@ -6,6 +6,9 @@
 Button {
     transition-property: all;
     transition-duration: 0.33s;
+    border-color: rgb(0, 0, 0);
+    border-width: 3px;
+    border-radius: 25px;
 }
 
 Button:hover {
@@ -19,7 +22,15 @@ Button:active {
     transition-property: translate;
     transition-timing-function: ease-out-bounce;
     transition-duration: 0.33s;
-    scale: 1.1 1.1;
+    scale: 1.08 1.08;
+}
+
+.unity-slider > .unity-label {
+    width: 300px;
+}
+
+.unity-popup-field > .unity-label {
+    width: 350px;
 }
 
 .title {
@@ -56,6 +67,21 @@ Button:active {
     height: 70px;
 }
 
+.start-button:active {
+    background-color: rgb(255, 0, 242);
+    border-color: rgb(255, 255, 255);
+}
+
+.start-button:hover {
+    background-color: rgb(37, 56, 75);
+    border-color: rgb(255, 255, 255);
+}
+
+.start-button:focus {
+    background-color: rgb(37, 56, 75);
+    border-color: rgb(255, 255, 255);
+}
+
 .main-background {
     flex-grow: 1;
     background-color: rgb(255, 255, 255);
@@ -77,6 +103,8 @@ Button:active {
 .list-item-container {
     background-color: rgba(0, 0, 0, 0);
     color: rgb(0, 0, 0);
+    margin: 5px;
+    padding: 5px;
 }
 
 .list-item-container.unity-collection-view__item--selected {
@@ -86,4 +114,70 @@ Button:active {
 
 .unity-list-view__empty-label {
     display: none;
+}
+
+.close-button {
+    align-self: flex-end;
+    justify-content: center;
+    align-items: auto;
+    width: 100px;
+    height: 100px;
+    right: 40px;
+    border-left-color: rgb(86, 86, 86);
+    border-right-color: rgb(86, 86, 86);
+    border-top-color: rgb(86, 86, 86);
+    border-bottom-color: rgb(86, 86, 86);
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.settings-header-button {
+    flex-grow: 1;
+    margin-right: 15px;
+    margin-left: 15px;
+    font-size: 48px;
+    text-shadow: 2px 1px 2px rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+}
+
+.settings-control {
+    margin-top: 25px;
+    margin-right: 50px;
+    margin-bottom: 25px;
+    margin-left: 50px;
+    font-size: 42px;
+    -unity-font-style: normal;
+}
+
+.settings-control-group {
+    flex-grow: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.settings-control-group-disabled {
+    opacity: 0;
+}
+
+.title-group {
+    flex-grow: 1;
+    align-self: center;
+    align-items: stretch;
+    width: 50%;
+    height: auto;
+    justify-content: center;
+    position: absolute;
+    top: auto;
+    left: 25%;
+    right: 25%;
 }

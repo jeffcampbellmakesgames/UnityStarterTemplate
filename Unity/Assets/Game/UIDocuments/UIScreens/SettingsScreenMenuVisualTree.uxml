@@ -1,0 +1,33 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/StyleSheets/TMGGameStyle.uss?fileID=7433441132597879392&amp;guid=565cfba2753e64aa2a70c0c45ac97e3d&amp;type=3#TMGGameStyle" />
+    <Style src="project://database/Assets/Game/StyleSheets/JCMGSlateStyle.uss?fileID=7433441132597879392&amp;guid=f7cd620bcd9e540a2971a79cb45b44b8&amp;type=3#JCMGSlateStyle" />
+    <ui:VisualElement name="BackgroundImage" class="main-background" style="flex-grow: 1; align-items: stretch; justify-content: flex-start;">
+        <ui:VisualElement name="HeaderGroup" style="flex-grow: 1; height: 20%; align-items: auto; justify-content: flex-start; top: 40px;">
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="CloseButton" class="close-button">
+                <ui:VisualElement style="flex-grow: 1; align-self: stretch; background-image: url(&apos;project://database/Assets/Game/Art/KenneyNL/UIPack/blue_cross.png?fileID=21300000&amp;guid=f92f04a0554764887b69751ee90c8019&amp;type=3#blue_cross&apos;);" />
+            </ui:Button>
+            <ui:VisualElement name="TitleGroup" class="title-group">
+                <ui:Label tabindex="-1" text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h1" style="align-self: center;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="BodyGroup" style="flex-grow: 1; height: 80%; align-self: auto; position: relative;">
+            <ui:VisualElement name="ButtonHeaderContainer" style="flex-grow: 1; height: 15%; flex-direction: row; margin-right: 40px; margin-left: 40px;">
+                <ui:Button text="Gameplay" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GameplaySettingsButton" class="settings-header-button" style="background-color: rgb(115, 205, 74);" />
+                <ui:Button text="Graphics" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GraphicsSettingsButton" class="settings-header-button" style="background-color: rgb(30, 167, 225);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="SettingsAreaContainer" style="flex-grow: 1; margin-top: 40px; margin-right: 40px; margin-bottom: 40px; margin-left: 40px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; background-color: rgb(175, 175, 175); height: 85%;">
+                <ui:VisualElement name="GraphicsSettingsGroup" class="settings-control-group" style="background-color: rgb(169, 201, 214);">
+                    <ui:DropdownField label="Target Framerate" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="TargetFramerateDropdown" class="settings-control" />
+                    <ui:DropdownField label="Window Mode" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="WindowModeDropdown" class="settings-control" />
+                    <ui:DropdownField label="Resolution" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="ResolutionDropdown" class="settings-control" />
+                    <ui:Button text="Apply Changes" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ApplyChangesButton" class="settings-dropdown settings-control" />
+                </ui:VisualElement>
+                <ui:VisualElement name="GameplaySettingsGroup" class="settings-control-group settings-control-group-disabled" style="background-color: rgb(161, 190, 149);">
+                    <ui:Slider picking-mode="Ignore" label="Master Volume" value="0.5" high-value="1" name="MasterVolumeSlider" class="settings-control" />
+                    <ui:Slider picking-mode="Ignore" label="SFX Volume" value="0.5" high-value="1" name="SFXVolumeSlider" class="settings-control" />
+                    <ui:Slider picking-mode="Ignore" label="Music Volume" value="0.5" high-value="1" name="MusicVolumeSlider" class="settings-control" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

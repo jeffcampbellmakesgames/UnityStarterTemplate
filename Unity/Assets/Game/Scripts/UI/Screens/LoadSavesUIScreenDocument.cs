@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 namespace Game
 {
     /// <summary>
-	/// A <see cref="UIScreenDocumentBase"/> for loading saves.
+	/// A UI document screen for loading saves.
 	/// </summary>
 	public sealed class LoadSavesUIScreenDocument : UIScreenDocumentBase
 	{
@@ -150,7 +150,7 @@ namespace Game
 		{
 			Hide();
 
-			var mainMenuUIScreen = UIScreenControl.GetScreen<MainMenuUIScreen>();
+			var mainMenuUIScreen = UIScreenControl.GetScreen<MainMenuUIScreenDocument>();
 			mainMenuUIScreen.Show();
 		}
 
