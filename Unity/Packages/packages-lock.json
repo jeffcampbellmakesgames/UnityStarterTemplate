@@ -52,7 +52,7 @@
       "hash": "db6d9f0fb695e5ccb0994cfc43ab21d75e8a56a6"
     },
     "com.tayx.graphy": {
-      "version": "3.0.2",
+      "version": "3.0.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -313,7 +313,7 @@
       "url": "https://packages.unity.com"
     },
     "com.yasirkula.ingamedebugconsole": {
-      "version": "1.6.2",
+      "version": "1.6.9",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
