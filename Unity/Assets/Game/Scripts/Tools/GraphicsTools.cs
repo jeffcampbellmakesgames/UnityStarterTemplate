@@ -107,7 +107,7 @@ namespace Game
 				{
 					width = Screen.width,
 					height = Screen.height,
-					refreshRate = Screen.currentResolution.refreshRate
+					refreshRateRatio = Screen.currentResolution.refreshRateRatio
 				};
 			}
 

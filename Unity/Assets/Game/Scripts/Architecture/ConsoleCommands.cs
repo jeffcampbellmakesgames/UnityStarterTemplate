@@ -46,6 +46,13 @@ namespace Game
 				"Clears all save data files from the local system.",
 				DeleteAllSaveData);
 
+			#if UNITY_EDITOR
+			DebugLogConsole.AddCommand(
+				"save-dir-open",
+				"Opens the folder to the save directory.",
+				OpenSaveDataDirectory);
+			#endif
+
 			// Graphics commands
 			DebugLogConsole.AddCommand(
 				"perf-ui-fps",
@@ -90,6 +97,16 @@ namespace Game
 		public void DeleteAllSaveData()
 		{
 			_savesAppSystem.DeleteAllSaveData();
+		}
+
+		/// <summary>
+		/// Deletes all save files from the local filesystem.
+		/// </summary>
+		public void OpenSaveDataDirectory()
+		{
+			#if UNITY_EDITOR
+			UnityEditor.EditorUtility.RevealInFinder(_savesAppSystem.SaveFileDirectoryAbsolutePath);
+			#endif
 		}
 
 		/// <summary>

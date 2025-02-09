@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/StyleSheets/TMGGameStyle.uss?fileID=7433441132597879392&amp;guid=565cfba2753e64aa2a70c0c45ac97e3d&amp;type=3#TMGGameStyle" />
+    <Style src="project://database/Assets/Game/StyleSheets/JCMGSlateStyle.uss?fileID=7433441132597879392&amp;guid=f7cd620bcd9e540a2971a79cb45b44b8&amp;type=3#JCMGSlateStyle" />
+    <ui:VisualElement name="BackgroundImage" class="main-background" style="flex-grow: 1; align-items: center; justify-content: flex-start; align-self: auto;">
+        <ui:VisualElement style="flex-grow: 1; width: 50%; height: 50%; bottom: 25%; top: 25%; position: absolute; left: 25%; right: 25%;">
+            <ui:VisualElement name="LoadingIconAnimate" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/External/ModalWindows/Sprites/icons8-delete-512.png?fileID=21300000&amp;guid=554e4dd916cdfc241b3a6e7103560128&amp;type=3#icons8-delete-512&apos;); background-color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(245, 0, 0); -unity-background-scale-mode: scale-to-fit; transition-property: all; transition-duration: 0s; transition-timing-function: ease; transition-delay: 0s; opacity: 0;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

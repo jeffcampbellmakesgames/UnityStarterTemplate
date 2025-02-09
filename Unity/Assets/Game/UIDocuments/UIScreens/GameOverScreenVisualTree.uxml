@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/StyleSheets/TMGGameStyle.uss?fileID=7433441132597879392&amp;guid=565cfba2753e64aa2a70c0c45ac97e3d&amp;type=3#TMGGameStyle" />
+    <Style src="project://database/Assets/Game/StyleSheets/JCMGSlateStyle.uss?fileID=7433441132597879392&amp;guid=f7cd620bcd9e540a2971a79cb45b44b8&amp;type=3#JCMGSlateStyle" />
+    <ui:VisualElement name="BackgroundImage" class="main-background" style="flex-grow: 1; align-items: stretch; justify-content: flex-start;">
+        <ui:VisualElement name="HeaderGroup" style="flex-grow: 1; height: 20%; align-items: auto; justify-content: flex-start; top: 40px;">
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="CloseButton" class="close-button">
+                <ui:VisualElement style="flex-grow: 1; align-self: stretch; background-image: url(&apos;project://database/Assets/Game/Art/KenneyNL/UIPack/blue_cross.png?fileID=21300000&amp;guid=f92f04a0554764887b69751ee90c8019&amp;type=3#blue_cross&apos;);" />
+            </ui:Button>
+            <ui:VisualElement name="TitleGroup" class="title-group">
+                <ui:Label tabindex="-1" text="Game Over" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h1" style="align-self: center;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="BodyGroup" style="flex-grow: 1; height: 80%; align-self: auto; position: relative;" />
+    </ui:VisualElement>
+</ui:UXML>

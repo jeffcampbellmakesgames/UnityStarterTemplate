@@ -8,7 +8,7 @@ namespace Game
 	public abstract class ScriptableGameSystem : ScriptableObject, IGameSystem
 	{
 		protected bool _isSetup;
-		
+
 		/// <inheritdoc />
 		public virtual void OneTimeSetup()
 		{
@@ -35,6 +35,12 @@ namespace Game
 
 		/// <inheritdoc />
 		public virtual void Teardown()
+		{
+			// No-op
+		}
+
+		/// <inheritdoc />
+		public virtual void ExecutePerFrame()
 		{
 			// No-op
 		}

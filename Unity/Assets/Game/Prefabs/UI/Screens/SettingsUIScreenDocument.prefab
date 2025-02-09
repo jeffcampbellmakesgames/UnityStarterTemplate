@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4361286647378823206
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6151586446878581998, guid: 87b7e37a092884fe79fd936990bde301,
+        type: 3}
+      propertyPath: m_Name
+      value: SettingsUIScreenDocument
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511455608595481690, guid: 87b7e37a092884fe79fd936990bde301,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511455608595481690, guid: 87b7e37a092884fe79fd936990bde301,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511455608595481690, guid: 87b7e37a092884fe79fd936990bde301,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511455608595481690, guid: 87b7e37a092884fe79fd936990bde301,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511455608595481690, guid: 87b7e37a092884fe79fd936990bde301,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511455608595481690, guid: 87b7e37a092884fe79fd936990bde301,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511455608595481690, guid: 87b7e37a092884fe79fd936990bde301,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511455608595481690, guid: 87b7e37a092884fe79fd936990bde301,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511455608595481690, guid: 87b7e37a092884fe79fd936990bde301,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511455608595481690, guid: 87b7e37a092884fe79fd936990bde301,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6550526167069954608, guid: 87b7e37a092884fe79fd936990bde301,
+        type: 3}
+      propertyPath: sourceAsset
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: d2fa7f75222514ebb87e59c62d9a02c0,
+        type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6151586446878581998, guid: 87b7e37a092884fe79fd936990bde301,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5551743765098553263}
+    - targetCorrespondingSourceObject: {fileID: 6151586446878581998, guid: 87b7e37a092884fe79fd936990bde301,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6258543020625248845}
+    - targetCorrespondingSourceObject: {fileID: 6151586446878581998, guid: 87b7e37a092884fe79fd936990bde301,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7614337068534227895}
+  m_SourcePrefab: {fileID: 100100000, guid: 87b7e37a092884fe79fd936990bde301, type: 3}
+--- !u!114 &7380911393575295510 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6550526167069954608, guid: 87b7e37a092884fe79fd936990bde301,
+    type: 3}
+  m_PrefabInstance: {fileID: 4361286647378823206}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7627044287722908872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &7627044287722908872 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6151586446878581998, guid: 87b7e37a092884fe79fd936990bde301,
+    type: 3}
+  m_PrefabInstance: {fileID: 4361286647378823206}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5551743765098553263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7627044287722908872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e34d33dba83454a830af2816da37da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiDocument: {fileID: 7380911393575295510}
+  _isInteractable: 1
+  _layer: {fileID: 11400000, guid: 3ccbffbf504b140c4bf8103a62c95dbe, type: 2}
+  _startupMode: 0
+  _visibleClassOverride: 
+  _hiddenClassOverride: 
+  _isVisible: 0
+  _gameplayUIPanel: {fileID: 6258543020625248845}
+  _graphicsUIPanel: {fileID: -7614337068534227895}
+  _settingsAppSystem: {fileID: 11400000, guid: 14109dcff536646d3adf465a6662d25f, type: 2}
+  _isInGameBoolVariable: {fileID: 11400000, guid: ce95624f0bf1a40148c748573407279a,
+    type: 2}
+--- !u!114 &6258543020625248845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7627044287722908872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5808bf05d39d4a86bed10c2c7c94bc69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiDocument: {fileID: 7380911393575295510}
+  _hideStyleClass: settings-control-group-disabled
+  _settingsAppSystem: {fileID: 11400000, guid: 14109dcff536646d3adf465a6662d25f, type: 2}
+--- !u!114 &-7614337068534227895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7627044287722908872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d48154106b4a288104943fc72f716f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiDocument: {fileID: 7380911393575295510}
+  _hideStyleClass: settings-control-group-disabled
+  _settingsAppSystem: {fileID: 11400000, guid: 14109dcff536646d3adf465a6662d25f, type: 2}
+  _graphicsAppSystem: {fileID: 11400000, guid: 3a2bf58d1486b4490bcb57ebba6f3aa7, type: 2}
+  _delayRevertChangesDurationFloatVariable: {fileID: 11400000, guid: 4de9a11c029e94e8db8a70de3ed137d7,
+    type: 2}
